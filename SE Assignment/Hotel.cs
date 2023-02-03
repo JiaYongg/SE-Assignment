@@ -10,20 +10,26 @@ namespace SE_Assignment
     {
         private string name;
         private string location;
-        private List<string> categoryList;
+        private string category;
         private List<string> facilityList;
         private List<HotelReservation> hrList;
         private int numStars;
         private bool voucherAllow;
         public string Name
         {
-            get { return Name; }
-            set { Name = value; }
+            get { return name; }
+            set { name = value; }
         }
         public string Location
         {
-            get { return Location; }
-            set { Location = value; }
+            get { return location; }
+            set { location = value; }
+        }
+
+        public string Category
+        {
+            get { return category; }
+            set { category = value; }
         }
         public int numStars
         {
