@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SE_Assignment
 {
-    class HotelReservation
+    public class HotelReservation
     {
         private string roomNum;
         private bool roomAvailable;
