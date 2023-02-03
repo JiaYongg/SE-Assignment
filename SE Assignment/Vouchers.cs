@@ -30,7 +30,10 @@ namespace SE_Assignment
 
         public bool isValid()
         {
-            // implementation
+            if (DateTime.Now > expiryDate)
+            {
+                return false;
+            }
         }
     }
 }
