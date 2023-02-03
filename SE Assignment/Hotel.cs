@@ -50,6 +50,19 @@ namespace SE_Assignment
         public int calcStars()
         {
             console.writeline("hi");
-        } 
+        }
+
+        // adds to the parksession list
+        public void addHotelReservation(HotelReservation hr)
+        {
+            if (!hotelReservationList.Contains(hr))
+            {
+                hotelReservationList.Add(hr);
+            }
+            else
+            {
+                Console.WriteLine("This reservation already exists!");
+            }
+        }
     }
 }
