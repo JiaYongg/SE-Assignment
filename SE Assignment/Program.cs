@@ -18,6 +18,36 @@ namespace SE_Assignment
             Guest guest5 = new Guest("Ken", "5", "93857365", "ken51@gmail.com", "S9858373G", 66.50);
             Guest guest6 = new Guest("Haz", "6", "81957484", "haz9485@outlook.com", "T0204857J", 10);
 
+            List<string> facilities1 = new List<string>("Gym", "Swimming Pool", "Lounge", "Sauna", "Casino");
+            List<string> facilities2 = new List<string>("Swimming Pool", "Lounge", "Sauna", "Casino");
+            List<string> facilities3 = new List<string>("Gym", "Swimming Pool", "Casino");
+            List<string> facilities4 = new List<string>("Gym", "Swimming Pool");
+            List<string> facilities5 = new List<string>("Gym", "Swimming Pool", "Lounge", "Sauna");
+
+            HotelReservation hr1 = new HotelReservation("101", true, 2, true, "King-sized Bed", 470);
+            HotelReservation hr2 = new HotelReservation("102", false, 2, true, "Queen-sized Bed", 420);
+            HotelReservation hr3 = new HotelReservation("103", true, 1, false, "Single Bed", 140);
+            HotelReservation hr4 = new HotelReservation("104", true, 2, false, "Double Bed", 220);
+            HotelReservation hr5 = new HotelReservation("105", false, 1, false, "Single Bed", 580);
+            HotelReservation hr6 = new HotelReservation("106", true, 2, true, "Double Bed", 450);
+            HotelReservation hr7 = new HotelReservation("107", true, 4, true, "Double King-sized Bed", 840);
+            HotelReservation hr8 = new HotelReservation("108", false, 4, true, "Double Queen-sized Bed", 480);
+            HotelReservation hr9 = new HotelReservation("109", false, 2, true, "King-sized Bed", 540);
+            HotelReservation hr10 = new HotelReservation("110", true, 2, true, "Queen-sized Bed", 320);
+
+            List<HotelReservation> hrList1 = new List<HotelReservation>(hr1, hr2);
+            List<HotelReservation> hrList2 = new List<HotelReservation>(hr3, hr4);
+            List<HotelReservation> hrList3 = new List<HotelReservation>(hr5, hr6);
+            List<HotelReservation> hrList4 = new List<HotelReservation>(hr7, hr8);
+            List<HotelReservation> hrList5 = new List<HotelReservation>(hr9, hr10);
+
+            Hotel luxuryHotel = Hotel("Luxurious Palace", "21 Orchard Rd", "Luxury", facilities1, hrList1, 5, true);
+            Hotel themedHotel = Hotel("SkyHigh Hotel", "Bugis St 99", "Themed", facilities2, hrList2, 3, true);
+            Hotel cityHotel = Hotel("Central City Hotel", "184 Newton Rd", "City", facilities3, hrList3, 2, true);
+            Hotel budgetHotel = Hotel("Budget101", "123 Toa Payoh Rd", "Budget", facilities4, hrList4, 4, true);
+            Hotel ffHotel = Hotel("FF Hotel", "Changi Rd", "Family-Friendly", facilities5, hrList5, 3, true);
+            
+            
 
             while (true)
             {
