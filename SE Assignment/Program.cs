@@ -75,7 +75,26 @@ namespace SE_Assignment
                 switch (main_choice)
                 {
                     case 1:
+                        Console.WriteLine("1) Browse Hotel Rooms");
+                        Console.WriteLine("2) Reserve Hotel Room");
+                        Console.WriteLine("3) View Reservation History");
+                        Console.WriteLine("4) View Profile");
+                        Console.WriteLine("5) View Balance");
+                        Console.WriteLine("6) Exit");
                         Console.WriteLine();
+
+
+                        Console.Write("Enter choice: ");
+                        string main_input = Console.ReadLine();
+                        bool success = Int32.TryParse(main_input, out main_choice);
+                        if (!success)
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine("Please Enter Integer Input only!");
+                            continue;
+                        }
+
+                    case 2:
                         break;
 
                 }
