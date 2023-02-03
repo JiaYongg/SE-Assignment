@@ -48,5 +48,27 @@ namespace SE_Assignment
             get { return roomCost; }
             set { roomCost = value; }
         }
+        public Hotel hotel
+        {
+            get { return hotel; }
+            set { hotel = value; }
+        }
+        public Reservation reservation
+        {
+            get { return reservation; }
+            set { reservation = value; }
+        }
+        public HotelReservation(string roomNum, bool roomAvailable, int maxGuest, bool hasBreakfast, string bedType, int roomCost)
+        {
+            RoomNum = roomNum;
+            RoomAvailable = roomAvailable;
+            MaxGuest = maxGuest;
+            HasBreakfast = hasBreakfast;
+            BedType = bedType;
+            RoomCost = roomCost;
+
+            hotel.addHotelReservation(this);
+            reservation.addHotelReservation(this);
+        }
     }
 }
