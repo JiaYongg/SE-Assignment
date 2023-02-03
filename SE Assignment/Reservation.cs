@@ -32,11 +32,11 @@ namespace SE_Assignment
             set { checkOutDate = value; }
         }
 
-        //public int reservationCost // Derivated Attribute
-        //{
-        //    get { return reservationCost; }
-        //    set { reservationCost = value; }
-        //}
+        public int ReservationCost // Derivated Attribute - Might need some changes later
+        {
+            get { return reservationCost; }
+            set { reservationCost = value; }
+        }
 
         public bool IsCancelled
         {
@@ -47,11 +47,11 @@ namespace SE_Assignment
         public Reservation() { };
         public Reservation(string id, DateTime checkIn, DateTime checkout, int costs, bool iscancelled) 
         {
-            reservationId = id;
-            checkInDate = checkIn; 
-            checkOutDate = checkout;
-            reservationCost = costs;
-            isCancelled = iscancelled;
+            ReservationId = id;
+            CheckInDate = checkIn; 
+            CheckOutDate = checkout;
+            ReservationCost = costs;
+            IsCancelled = iscancelled;
         }
 
         public void checkIn()
