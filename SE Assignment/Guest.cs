@@ -79,5 +79,35 @@ namespace SE_Assignment
 
         }
 
+        public void topup()
+        {
+            while (true)
+            {
+                Console.Write("Enter the amount you want to top up: ");
+                string amt = Console.ReadLine();
+                double tpamt;
+
+                bool success = Int32.TryParse(amt, out tpamt);
+                if (!success)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Please Enter Numbers only!");
+                    continue;
+                }
+                else
+                {
+                    if (amt < 0)
+                    {
+                        Console.WriteLine("Invalid Amount!");
+                    }
+                    else if (amt > 0)
+                    {
+                        balance += amt;
+                        Console.WriteLine(String.Format("${0} has been topped up to your account. Your total balance is now ${1}", amt, balance));
+                    }
+                }
+            }
+        }
+
     }
 }
