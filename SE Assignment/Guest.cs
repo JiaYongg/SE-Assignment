@@ -79,7 +79,7 @@ namespace SE_Assignment
 
         }
 
-        public void topup()
+        public void topUp()
         {
             while (true)
             {
@@ -96,7 +96,7 @@ namespace SE_Assignment
                 }
                 else
                 {
-                    if (amt < 0)
+                    if (amt <= 0)
                     {
                         Console.WriteLine("Invalid Amount!");
                     }
@@ -106,6 +106,22 @@ namespace SE_Assignment
                         Console.WriteLine(String.Format("${0} has been topped up to your account. Your total balance is now ${1}", amt, balance));
                     }
                 }
+            }
+        }
+
+        public void makePayment(Reservation r)
+        {
+
+            if (balance >= r.ReservationCost)
+            {
+                balance -= r.ReservationCost;
+                Console.WritLine("${0} has been deducted from your account balance. Your remaining balance is ${1}".Format(r.ReservationCost, balance));
+            }
+            else if (balance < r.ReservationCost)
+            {
+                Console.WriteLine("Insufficient Funds, Topup your account balance or pay the remaining with your credit card.");
+                // implementation
+
             }
         }
 

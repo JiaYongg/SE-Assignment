@@ -18,6 +18,8 @@ namespace SE_Assignment
             Guest guest5 = new Guest("Ken", "5", "93857365", "ken51@gmail.com", "S9858373G", 66.50);
             Guest guest6 = new Guest("Haz", "6", "81957484", "haz9485@outlook.com", "T0204857J", 10);
 
+            List<Guest> guestList = new List<Guest>(guest1, guest2, guest3, guest4, guest5, guest6);
+
             List<string> facilities1 = new List<string>("Gym", "Swimming Pool", "Lounge", "Sauna", "Casino");
             List<string> facilities2 = new List<string>("Swimming Pool", "Lounge", "Sauna", "Casino");
             List<string> facilities3 = new List<string>("Gym", "Swimming Pool", "Casino");
@@ -51,7 +53,6 @@ namespace SE_Assignment
 
             while (true)
             {
-                int main_choice;
                 // simple login option
                 //Console.WriteLine();
                 Console.WriteLine("------------Log in as------------");
@@ -60,21 +61,26 @@ namespace SE_Assignment
                 Console.WriteLine("3) Exit");
                 Console.WriteLine();
 
-                // Validation to ensure the input are NUMBERS ONLY
-                Console.Write("Enter choice: ");
-                string main_input = Console.ReadLine();
-                bool success = Int32.TryParse(main_input, out main_choice);
-                if (!success)
-                {
-                    Console.WriteLine();
-                    Console.WriteLine("Please Enter Integer Input only!");
-                    continue;
-                }
 
                 // choosing the options
-                switch (main_choice)
+                switch (EnterOption())
                 {
                     case 1:
+                        Console.Write("Enter NRIC:");
+                        string nric = Console.ReadLine();
+                        foreach (Guest g in guestList)
+                        {
+                            if (g.Nric == nric)
+                            {
+                                Guest user = g;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid User!");
+                            }
+                        }
+
+
                         Console.WriteLine("1) Browse Hotel Rooms");
                         Console.WriteLine("2) Reserve Hotel Room");
                         Console.WriteLine("3) View Reservation History");
@@ -83,22 +89,59 @@ namespace SE_Assignment
                         Console.WriteLine("6) Exit");
                         Console.WriteLine();
 
-
-                        Console.Write("Enter choice: ");
-                        string main_input = Console.ReadLine();
-                        bool success = Int32.TryParse(main_input, out main_choice);
-                        if (!success)
+                        // choosing the options
+                        switch (EnterOption())
                         {
-                            Console.WriteLine();
-                            Console.WriteLine("Please Enter Integer Input only!");
-                            continue;
+                            case 1:
+                                continue;
+                            case 2:
+                                continue;
+                            case 3:
+                                continue;
+                            case 4:
+                                continue;
+                            case 5:
+
+                                Console.WriteLine("You currently have ${0} in your account balance.".Format(user.balance));
+                                Console.WriteLine("1) Top up");
+                                Console.WriteLine("2) Exit");
+
+                                switch(EnterOption())
+                                {
+                                    case 1:
+                                        user.topUp();
+                                    case 2:
+                                        continue;
+                                }
+                            case 6:
+                                continue;
                         }
 
                     case 2:
+                        continue;
+
+                    case 3:
                         break;
 
                 }
             }
         }
+        public static int EnterOption()
+        {
+            // Validation to ensure the input are NUMBERS ONLY
+            int main_choice;
+            Console.Write("Enter choice: ");
+            string main_input = Console.ReadLine();
+            bool success = Int32.TryParse(main_input, out main_choice);
+            if (!success)
+            {
+                Console.WriteLine();
+                Console.WriteLine("Please Enter Integer Input only!");
+                continue;
+            }
+
+            return main_choice;
+        }
+
     }
 }

@@ -66,9 +66,10 @@ namespace SE_Assignment
             Console.WriteLine("Check Out Date: " + CheckOutDate);
         }
 
-        public void calculateCost()
+        public double calculateCost(HotelReservation hr)
         {
-            //Implementation
+            double cost = (CheckOutDate - CheckInDate).TotalDays * hr.roomCost;
+            return cost;
         }
 
         public bool isRoomAvail()
