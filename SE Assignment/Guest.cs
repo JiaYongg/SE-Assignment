@@ -96,14 +96,14 @@ namespace SE_Assignment
                 }
                 else
                 {
-                    if (amt <= 0)
+                    if (tpamt <= 0)
                     {
                         Console.WriteLine("Invalid Amount!");
                     }
-                    else if (amt > 0)
+                    else if (tpamt > 0)
                     {
-                        balance += amt;
-                        Console.WriteLine(String.Format("${0} has been topped up to your account. Your total balance is now ${1}", amt, balance));
+                        balance += tpamt;
+                        Console.WriteLine(String.Format("${0} has been topped up to your account. Your total balance is now ${1}", tpamt, balance));
                     }
                 }
             }
@@ -115,7 +115,7 @@ namespace SE_Assignment
             if (balance >= r.ReservationCost)
             {
                 balance -= r.ReservationCost;
-                Console.WritLine("${0} has been deducted from your account balance. Your remaining balance is ${1}".Format(r.ReservationCost, balance));
+                Console.WriteLine("${0} has been deducted from your account balance. Your remaining balance is ${1}".Format(Convert.ToString(r.ReservationCost), Convert.ToString(balance)));
             }
             else if (balance < r.ReservationCost)
             {

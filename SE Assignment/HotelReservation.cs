@@ -11,49 +11,49 @@ namespace SE_Assignment
         private string roomNum;
         private bool roomAvailable;
         private int maxGuest;
-        private bool hasBrakfast;
+        private bool hasBreakfast;
         private string bedType;
         private int roomCost;
 
         private Hotel hotel;
         private Reservation reservation;
 
-        public string roomNum
+        public string RoomNum
         {
             get { return roomNum; }
             set { roomNum = value; }
         }
-        public bool roomAvailable
+        public bool RoomAvailable
         {
             get { return roomAvailable; }
             set { roomAvailable = value; }
         }
-        public int maxGuest
+        public int MaxGuest
         {
             get { return maxGuest; }
             set { maxGuest = value; }
         }
-        public bool hasBreakfast
+        public bool HasBreakfast
         {
             get { return hasBreakfast; }
             set { hasBreakfast = value; }
         }
-        public string bedType
+        public string BedType
         {
             get { return bedType; }
             set { bedType = value; }
         }
-        public int roomCost
+        public int RoomCost
         {
             get { return roomCost; }
             set { roomCost = value; }
         }
-        public Hotel hotel
+        public Hotel Hotel
         {
             get { return hotel; }
             set { hotel = value; }
         }
-        public Reservation reservation
+        public Reservation Reservation
         {
             get { return reservation; }
             set { reservation = value; }
@@ -67,8 +67,8 @@ namespace SE_Assignment
             BedType = bedType;
             RoomCost = roomCost;
 
-            hotel.addHotelReservation(this);
-            reservation.addHotelReservation(this);
+            Hotel.addHotelReservation(this);
+            Reservation.addHotelReservation(this);
         }
     }
 }

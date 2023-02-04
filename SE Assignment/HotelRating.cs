@@ -32,11 +32,11 @@ namespace SE_Assignment
 
         public HotelRating() { }
 
-        public HotelRating(string id, int stars, string c)
+        public HotelRating(string id, int stars, string comment)
         {
-            ratingId = id;
-            ratingStars = stars;
-            comments = c;
+            RatingId = id;
+            RatingStars = stars;
+            Comments = comment;
         }
 
     }

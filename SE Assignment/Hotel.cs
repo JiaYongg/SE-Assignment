@@ -31,31 +31,32 @@ namespace SE_Assignment
             get { return category; }
             set { category = value; }
         }
-        public int numStars
+        public int NumStars
         {
             get { return numStars; }
             set { numStars = value; }
         }
-        public bool voucherAllow
+        public bool VoucherAllow
         {
             get { return voucherAllow; }
             set { voucherAllow = value; }
         }
-        public Hotel(string name, string location, int numstars, bool voucherAllow)
+        public Hotel(string name, string location, int numstars, bool voucherallow)
         {
             Name = name;
             Location = location;
-            NumStars = numStars;
-            VoucherAllow = voucherAllow;
+            NumStars = numstars;
+            VoucherAllow = voucherallow;
 
-            hotelReservationList = new List<HotelReservation>();
+            hrList = new List<HotelReservation>();
             facilityList = new List<string>();
             categoryList = new List<string>();
         }
 
         public int calcStars()
         {
-            console.writeline("hi");
+            //implementation
+            //console.writeline("hi");
         }
 
         // adds to the parksession list
