@@ -18,6 +18,14 @@ namespace SE_Assignment
             Guest guest5 = new Guest("Ken", "5", "93857365", "ken51@gmail.com", "S9858373G", 66.50);
             Guest guest6 = new Guest("Haz", "6", "81957484", "haz9485@outlook.com", "T0204857J", 10);
 
+            Reservation reservation1 = new Reservation("1", "01/01/2023", "05/01/2023", 250, false);
+            Reservation reservation2 = new Reservation("2", "12/12/2022", "17/12/2022", 500, true);
+            Reservation reservation3 = new Reservation("3", "07/01/2023", "08/01/2023", 120, false);
+            Reservation reservation4 = new Reservation("4", "30/12/2022", "12/01/2023", 700, true);
+            Reservation reservation5 = new Reservation("5", "18/11/2022", "20/11/2022", 300, false);
+
+
+
             List<Guest> guestList = new List<Guest>{guest1, guest2, guest3, guest4, guest5, guest6};
 
             List<string> facilities1 = new List<string>{"Gym", "Swimming Pool", "Lounge", "Sauna", "Casino"};
@@ -71,6 +79,7 @@ namespace SE_Assignment
                         if (nric == null)
                         {
                             Console.WriteLine("NRIC cannot be empty!");
+                            continue;
                         }
                         else
                         {
@@ -95,14 +104,41 @@ namespace SE_Assignment
                                         case 2:
                                             continue;
                                         case 3:
-                                            continue;
+                                            Console.WriteLine("------------Reservation History------------");
+                                            foreach (Reservation r in)
+
+                                            while (true)
+                                            {
+                                                Console.WriteLine("------------Menu------------");
+                                                Console.WriteLine("1) Exit");
+
+                                                switch (EnterOption())
+                                                {
+                                                    case 1:
+                                                        continue;
+                                                    default:
+                                                        Console.WriteLine("Invalid Option!");
+                                                        continue;
+                                                }
+                                            }
+                                            
                                         case 4:
 
-                                            Console.WriteLine("Name: ", g.Name);
-                                            Console.WriteLine("Contact Number: ", g.ContactNum);
-                                            Console.WriteLine("Email: ", g.Email);
+                                            Console.WriteLine("Name: {0,15}", g.Name);
+                                            Console.WriteLine("Contact Number: {0,10}", g.ContactNum);
+                                            Console.WriteLine("Email: {0,28}", g.Email);
 
-                                            continue;
+                                            Console.WriteLine("------------Menu------------");
+                                            Console.WriteLine("1) Exit");
+
+                                            switch (EnterOption())
+                                            {
+                                                case 1:
+                                                    continue;
+                                                default:
+                                                    Console.WriteLine("Invalid Option!");
+                                                    return;
+                                            }
                                         case 5:
 
                                             Console.WriteLine("You currently have ${0:#.00} in your account balance.", g.Balance);
@@ -128,9 +164,9 @@ namespace SE_Assignment
                                     continue;
                                 }
                             }
+                            Console.WriteLine("User does not exist!\n");
+                            continue;
                         }
-
-                        return;
 
                     case 2:
                         continue;

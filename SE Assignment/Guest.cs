@@ -52,9 +52,7 @@ namespace SE_Assignment
             set { balance = value; }
         }
 
-        public Guest() { }
-
-        public Guest(string name, string id, string contactNum, string email, string nric, double balance)
+        public Guest(string name, string id, string contactNum, string email, string nric, double balance, List<Reservation> rList)
         {
             Name = name;
             Id = id;
@@ -62,6 +60,7 @@ namespace SE_Assignment
             Email = email;
             Nric = nric;
             Balance = balance;
+            reservationList = rList;
         }
 
         public void addReservation(Reservation r)
