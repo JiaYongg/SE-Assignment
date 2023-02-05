@@ -67,8 +67,8 @@ namespace SE_Assignment
             BedType = bedType;
             RoomCost = roomCost;
 
-            Hotel.addHotelReservation(this);
-            Reservation.addHotelReservation(this);
+            //Hotel.addHotelReservation(this);
+            //Reservation.addHotelReservation(this);
         }
     }
 }

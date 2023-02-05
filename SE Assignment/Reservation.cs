@@ -44,14 +44,7 @@ namespace SE_Assignment
             set { isCancelled = value; }
         }
 
-        public Reservation(string id, DateTime checkIn, DateTime checkout, int costs, bool iscancelled) 
-        {
-            ReservationId = id;
-            CheckInDate = checkIn; 
-            CheckOutDate = checkout;
-            ReservationCost = costs;
-            IsCancelled = iscancelled;
-        }
+
 
         public void checkIn()
         {
@@ -67,7 +60,7 @@ namespace SE_Assignment
 
         public double calculateCost(HotelReservation hr)
         {
-            double cost = (CheckOutDate - CheckInDate).TotalDays * hr.roomCost;
+            double cost = (CheckOutDate - CheckInDate).TotalDays * hr.RoomCost;
             return cost;
         }
 

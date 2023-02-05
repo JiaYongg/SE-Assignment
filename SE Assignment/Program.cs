@@ -20,7 +20,7 @@ namespace SE_Assignment
 
             List<Guest> guestList = new List<Guest>{guest1, guest2, guest3, guest4, guest5, guest6};
 
-            List<string> facilities1 = new List<string> { "Gym", "Swimming Pool", "Lounge", "Sauna", "Casino" };
+            List<string> facilities1 = new List<string>{"Gym", "Swimming Pool", "Lounge", "Sauna", "Casino"};
             List<string> facilities2 = new List<string>{"Swimming Pool", "Lounge", "Sauna", "Casino"};
             List<string> facilities3 = new List<string>{"Gym", "Swimming Pool", "Casino"};
             List<string> facilities4 = new List<string>{"Gym", "Swimming Pool"};
@@ -43,11 +43,11 @@ namespace SE_Assignment
             List<HotelReservation> hrList4 = new List<HotelReservation>{hr7, hr8};
             List<HotelReservation> hrList5 = new List<HotelReservation>{hr9, hr10};
 
-            Hotel luxuryHotel = new Hotel("Luxurious Palace", "21 Orchard Rd", "Luxury", facilities1, hrList1, 5, true);
-            Hotel themedHotel = new Hotel("SkyHigh Hotel", "Bugis St 99", "Themed", facilities2, hrList2, 3, true);
-            Hotel cityHotel = new Hotel("Central City Hotel", "184 Newton Rd", "City", facilities3, hrList3, 2, true);
-            Hotel budgetHotel = new Hotel("Budget101", "123 Toa Payoh Rd", "Budget", facilities4, hrList4, 4, true);
-            Hotel ffHotel = new Hotel("FF Hotel", "Changi Rd", "Family-Friendly", facilities5, hrList5, 3, true);
+            Hotel luxuryHotel = new Hotel( "Luxurious Palace", "21 Orchard Rd", "Luxury", 5, true, facilities1, hrList1);
+            Hotel themedHotel = new Hotel("SkyHigh Hotel", "Bugis St 99", "Themed", 3, true, facilities2, hrList2);
+            Hotel cityHotel = new Hotel("Central City Hotel", "184 Newton Rd", "City", 2, true, facilities3, hrList3);
+            Hotel budgetHotel = new Hotel("Budget101", "123 Toa Payoh Rd", "Budget", 4, true, facilities4, hrList4);
+            Hotel ffHotel = new Hotel("FF Hotel", "Changi Rd", "Family-Friendly", 3, true, facilities5, hrList5);
             
             
 
@@ -66,56 +66,71 @@ namespace SE_Assignment
                 switch (EnterOption())
                 {
                     case 1:
-                        Console.Write("Enter NRIC:");
-                        string nric = Console.ReadLine();
-                        foreach (Guest g in guestList)
+                        Console.Write("Enter NRIC: ");
+                        string? nric = Console.ReadLine();
+                        if (nric == null)
                         {
-                            if (g.Nric == nric)
-                            {
-                                Guest user = g;
-                            }
-                            else
-                            {
-                                Console.WriteLine("Invalid User!");
-                            }
+                            Console.WriteLine("NRIC cannot be empty!");
                         }
-
-
-                        Console.WriteLine("1) Browse Hotel Rooms");
-                        Console.WriteLine("2) Reserve Hotel Room");
-                        Console.WriteLine("3) View Reservation History");
-                        Console.WriteLine("4) View Profile");
-                        Console.WriteLine("5) View Balance");
-                        Console.WriteLine("6) Exit");
-                        Console.WriteLine();
-
-                        // choosing the options
-                        switch (EnterOption())
+                        else
                         {
-                            case 1:
-                                continue;
-                            case 2:
-                                continue;
-                            case 3:
-                                continue;
-                            case 4:
-                                continue;
-                            case 5:
-
-                                Console.WriteLine("You currently have ${0} in your account balance.".Format(user.balance));
-                                Console.WriteLine("1) Top up");
-                                Console.WriteLine("2) Exit");
-
-                                switch(EnterOption())
+                            foreach (Guest g in guestList)
+                            {
+                                if (g.Nric == nric)
                                 {
-                                    case 1:
-                                        user.topUp();
-                                    case 2:
-                                        continue;
+                                    Console.WriteLine("\nWelcome, {0}\n", g.Name);
+                                    Console.WriteLine("1) Browse Hotel Rooms");
+                                    Console.WriteLine("2) Reserve Hotel Room");
+                                    Console.WriteLine("3) View Reservation History");
+                                    Console.WriteLine("4) View Profile");
+                                    Console.WriteLine("5) View Balance");
+                                    Console.WriteLine("6) Exit");
+                                    Console.WriteLine();
+
+                                    // choosing the options
+                                    switch (EnterOption())
+                                    {
+                                        case 1:
+                                            continue;
+                                        case 2:
+                                            continue;
+                                        case 3:
+                                            continue;
+                                        case 4:
+
+                                            Console.WriteLine("Name: ", g.Name);
+                                            Console.WriteLine("Contact Number: ", g.ContactNum);
+                                            Console.WriteLine("Email: ", g.Email);
+
+                                            continue;
+                                        case 5:
+
+                                            Console.WriteLine("You currently have ${0:#.00} in your account balance.", g.Balance);
+                                            Console.WriteLine("------------Menu------------");
+                                            Console.WriteLine("1) Top up");
+                                            Console.WriteLine("2) Exit");
+
+                                            switch (EnterOption())
+                                            {
+                                                case 1:
+                                                    //user.topUp();
+                                                    return;
+                                                case 2:
+                                                    continue;
+                                            }
+                                            return;
+                                        case 6:
+                                            continue;
+                                    }
                                 }
-                            case 6:
-                                continue;
+                                else
+                                {
+                                    continue;
+                                }
+                            }
                         }
+
+                        return;
 
                     case 2:
                         continue;
@@ -123,7 +138,12 @@ namespace SE_Assignment
                     case 3:
                         break;
 
+                    default:
+                        Console.WriteLine("Invalid Option!\n");
+                        continue;
+
                 }
+
             }
         }
         public static int EnterOption()
@@ -131,15 +151,21 @@ namespace SE_Assignment
             // Validation to ensure the input are NUMBERS ONLY
             int main_choice;
             Console.Write("Enter choice: ");
-            string main_input = Console.ReadLine();
+            string? main_input = Console.ReadLine();
             bool success = Int32.TryParse(main_input, out main_choice);
-            if (!success)
+            while (true)
             {
-                Console.WriteLine();
-                Console.WriteLine("Please Enter Integer Input only!");
-                continue;
+                if (!success)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Please Enter Integer Input only!");
+                    break;
+                }
+                else
+                {
+                    break;
+                }
             }
-
             return main_choice;
         }
 

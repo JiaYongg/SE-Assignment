@@ -25,7 +25,6 @@ namespace SE_Assignment
             get { return location; }
             set { location = value; }
         }
-
         public string Category
         {
             get { return category; }
@@ -41,30 +40,29 @@ namespace SE_Assignment
             get { return voucherAllow; }
             set { voucherAllow = value; }
         }
-        public Hotel(string name, string location, int numstars, bool voucherallow)
+        public Hotel(string name, string location, string category, int numstars, bool voucherallow, List<string> fList, List<HotelReservation> hrlist)
         {
             Name = name;
             Location = location;
+            Category = category;
             NumStars = numstars;
             VoucherAllow = voucherallow;
 
-            hrList = new List<HotelReservation>();
-            facilityList = new List<string>();
-            categoryList = new List<string>();
+            facilityList = fList;
+            hrList = hrlist;
         }
 
         public int calcStars()
         {
-            //implementation
-            //console.writeline("hi");
+            return 0;
         }
 
         // adds to the parksession list
         public void addHotelReservation(HotelReservation hr)
         {
-            if (!hotelReservationList.Contains(hr))
+            if (!hrList.Contains(hr))
             {
-                hotelReservationList.Add(hr);
+                hrList.Add(hr);
             }
             else
             {

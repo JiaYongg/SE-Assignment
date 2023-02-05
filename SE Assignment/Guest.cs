@@ -14,6 +14,7 @@ namespace SE_Assignment
         private string email;
         private string nric;
         private double balance;
+        private List<Reservation> reservationList = new List<Reservation>();
 
         public string Name
         {
@@ -51,6 +52,8 @@ namespace SE_Assignment
             set { balance = value; }
         }
 
+        public Guest() { }
+
         public Guest(string name, string id, string contactNum, string email, string nric, double balance)
         {
             Name = name;
@@ -61,16 +64,28 @@ namespace SE_Assignment
             Balance = balance;
         }
 
-        public Reservation makeReservation()
+        public void addReservation(Reservation r)
         {
             // implementation
-
+            reservationList.Add(r);
         }
 
-        public bool cancelReservation()
+        public bool cancelReservation(Reservation r)
         {
             // implementation
-
+            foreach (Reservation re in reservationList)
+            {
+                if (r.ReservationId == re.ReservationId)
+                {
+                    reservationList.Remove(r);
+                    return true;
+                }
+                else
+                {
+                    continue;
+                }
+            }
+            return false;
         }
 
         public void rateHotel()
@@ -84,10 +99,10 @@ namespace SE_Assignment
             while (true)
             {
                 Console.Write("Enter the amount you want to top up: ");
-                string amt = Console.ReadLine();
+                string? amt = Console.ReadLine();
                 double tpamt;
 
-                bool success = Int32.TryParse(amt, out tpamt);
+                bool success = Double.TryParse(amt, out tpamt);
                 if (!success)
                 {
                     Console.WriteLine();
@@ -115,7 +130,7 @@ namespace SE_Assignment
             if (balance >= r.ReservationCost)
             {
                 balance -= r.ReservationCost;
-                Console.WriteLine("${0} has been deducted from your account balance. Your remaining balance is ${1}".Format(Convert.ToString(r.ReservationCost), Convert.ToString(balance)));
+                Console.WriteLine("${0} has been deducted from your account balance. Your remaining balance is ${1}",Convert.ToString(r.ReservationCost), Convert.ToString(balance));
             }
             else if (balance < r.ReservationCost)
             {
