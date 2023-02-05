@@ -52,7 +52,7 @@ namespace SE_Assignment
             set { balance = value; }
         }
 
-        public Guest(string name, string id, string contactNum, string email, string nric, double balance, List<Reservation> rList)
+        public Guest(string name, string id, string contactNum, string email, string nric, double balance)
         {
             Name = name;
             Id = id;
@@ -60,7 +60,6 @@ namespace SE_Assignment
             Email = email;
             Nric = nric;
             Balance = balance;
-            reservationList = rList;
         }
 
         public void addReservation(Reservation r)
@@ -136,6 +135,14 @@ namespace SE_Assignment
                 Console.WriteLine("Insufficient Funds, Topup your account balance or pay the remaining with your credit card.");
                 // implementation
 
+            }
+        }
+
+        public void displayReservations()
+        {
+            foreach (Reservation re in reservationList)
+            {
+                //implementation
             }
         }
 
