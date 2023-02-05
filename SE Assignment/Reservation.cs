@@ -44,7 +44,14 @@ namespace SE_Assignment
             set { isCancelled = value; }
         }
 
-
+        public Reservation(string id, DateTime checkIn, DateTime checkout, int costs, bool iscancelled)
+        {
+            ReservationId = id;
+            CheckInDate = checkIn;
+            CheckOutDate = checkout;
+            ReservationCost = costs;
+            IsCancelled = iscancelled;
+        }
 
         public void checkIn()
         {
