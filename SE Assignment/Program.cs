@@ -18,12 +18,19 @@ namespace SE_Assignment
             Guest guest5 = new Guest("Ken", "5", "93857365", "ken51@gmail.com", "S9858373G", 66.50);
             Guest guest6 = new Guest("Haz", "6", "81957484", "haz9485@outlook.com", "T0204857J", 10);
 
-            Reservation reservation1 = new Reservation("1", "01/01/2023", "05/01/2023", 250, false);
-            Reservation reservation2 = new Reservation("2", "12/12/2022", "17/12/2022", 500, true);
-            Reservation reservation3 = new Reservation("3", "07/01/2023", "08/01/2023", 120, false);
-            Reservation reservation4 = new Reservation("4", "30/12/2022", "12/01/2023", 700, true);
-            Reservation reservation5 = new Reservation("5", "18/11/2022", "20/11/2022", 300, false);
+            Reservation reservation1 = new Reservation("1", new DateTime(2023, 1, 1), new DateTime(2023, 1, 5), 250, false);
+            Reservation reservation2 = new Reservation("2", new DateTime(2022, 12, 12), new DateTime(2022, 12, 17), 500, true);
+            Reservation reservation3 = new Reservation("3", new DateTime(2023, 1, 7), new DateTime(2023, 1, 8), 120, false);
+            Reservation reservation4 = new Reservation("4", new DateTime(2022, 12, 30), new DateTime(2023, 1, 12), 700, true);
+            Reservation reservation5 = new Reservation("5", new DateTime(2022, 11, 18), new DateTime(2022, 11, 20), 300, false);
+            Reservation reservation6 = new Reservation("6", new DateTime(2021, 5, 18), new DateTime(2021, 5, 22), 440, false);
 
+            guest1.addReservation(reservation1);
+            guest2.addReservation(reservation2);
+            guest3.addReservation(reservation3);
+            guest4.addReservation(reservation4);
+            guest5.addReservation(reservation5);
+            guest6.addReservation(reservation6);
 
 
             List<Guest> guestList = new List<Guest>{guest1, guest2, guest3, guest4, guest5, guest6};
@@ -105,7 +112,7 @@ namespace SE_Assignment
                                             continue;
                                         case 3:
                                             Console.WriteLine("------------Reservation History------------");
-                                            foreach (Reservation r in)
+                                            //foreach (Reservation r in)
 
                                             while (true)
                                             {
