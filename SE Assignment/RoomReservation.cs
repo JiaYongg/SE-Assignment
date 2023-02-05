@@ -8,19 +8,25 @@ namespace SE_Assignment
 {
     public class RoomReservation
     {
-        private Room room;
-        private Reservation reservation;
-
-        public Room Room
+        private string reservationID;
+        private string roomID;
+        private double totalCost;
+        public string ReservationID
         {
-            get { return room; }
-            set { room = value; }
+            get { return reservationID; }
+            set { reservationID = value; }
+        }
+        public string RoomID
+        {
+            get { return roomID; }
+            set { roomID = value; }
         }
 
-        public Reservation Reservation
+        public double TotalCost
         {
-            get { return reservation; }
-            set { reservation = value; }
+            get { return totalCost; }
+            set { totalCost = value; }
         }
+
     }
 }

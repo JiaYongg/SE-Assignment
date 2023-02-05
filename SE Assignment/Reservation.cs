@@ -12,7 +12,7 @@ namespace SE_Assignment
         private DateTime checkInDate;
         private DateTime checkOutDate;
         private double reservationCost;
-        private bool isCancelled;
+        private string status;
 
         public string ReservationId
         {
@@ -38,10 +38,10 @@ namespace SE_Assignment
             set { reservationCost = value; }
         }
 
-        public bool IsCancelled
+        public bool Status
         {
-            get { return isCancelled; }
-            set { isCancelled = value; }
+            get { return status; }
+            set { status = value; }
         }
 
         public Reservation(string id, DateTime checkIn, DateTime checkout, int costs, bool iscancelled)
