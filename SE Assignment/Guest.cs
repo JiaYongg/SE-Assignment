@@ -168,7 +168,18 @@ namespace SE_Assignment
             Console.WriteLine("{0,-5} {1,-15} {2,-15} {3,-15} ${4,-10}", "ID", "Check-In Date", "Check-Out Date", "Status", "Cost");
             foreach (Reservation re in reservationList)
             {
-                //implementation
+                if (re.Status == "Submitted" || re.Status == "Confirmed")
+                {
+                    if ((re.CheckInDate - DateTime.Now).TotalDays >= 2)
+                    {
+                        editable++;
+                        Console.WriteLine("{0,-5} {1,-15} {2,-15} {3,-15} ${4,-10:#.00}", re.ReservationId, re.CheckInDate.ToString("dd/MM/yyyy"), re.CheckOutDate.ToString("dd/MM/yyyy"), re.Status, re.ReservationCost);
+                    }
+                }
+            }
+            if (editable == 0)
+            {
+                Console.WriteLine("No Reservations can be editted.");
             }
         }
 
