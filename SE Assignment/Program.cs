@@ -57,29 +57,28 @@ namespace SE_Assignment
             List<string> facilities4 = new List<string> { "Gym", "Swimming Pool" };
             List<string> facilities5 = new List<string> { "Gym", "Swimming Pool", "Lounge", "Sauna" };
 
-            HotelReservation hr1 = new HotelReservation("101", true, 2, true, "King-sized Bed", 470);
-            HotelReservation hr2 = new HotelReservation("102", false, 2, true, "Queen-sized Bed", 420);
-            HotelReservation hr3 = new HotelReservation("103", true, 1, false, "Single Bed", 140);
-            HotelReservation hr4 = new HotelReservation("104", true, 2, false, "Double Bed", 220);
-            HotelReservation hr5 = new HotelReservation("105", false, 1, false, "Single Bed", 580);
-            HotelReservation hr6 = new HotelReservation("106", true, 2, true, "Double Bed", 450);
-            HotelReservation hr7 = new HotelReservation("107", true, 4, true, "Double King-sized Bed", 840);
-            HotelReservation hr8 = new HotelReservation("108", false, 4, true, "Double Queen-sized Bed", 480);
-            HotelReservation hr9 = new HotelReservation("109", false, 2, true, "King-sized Bed", 540);
-            HotelReservation hr10 = new HotelReservation("110", true, 2, true, "Queen-sized Bed", 320);
+            Room room1 = new Room(101, "King-sized Bed", true, 2,  470);
+            Room room2 = new Room(102, "Queen-sized Bed", false, 2, 420);
+            Room room3 = new Room(103, "Single Bed", true, 1, 140);
+            Room room4 = new Room(104, "Double Bed", true, 2, 220);
+            Room room5 = new Room(105, "Single Bed", false, 1, 580);
+            Room room6 = new Room(106, "Double Bed", true, 2, 450);
+            Room room7 = new Room(107, "Double King-sized Bed", true, 4, 840);
+            Room room8 = new Room(108, "Double Queen-sized Bed", false, 4, 480);
+            Room room9 = new Room(109, "King-sized Bed", false, 2, 540);
+            Room room10 = new Room(110, "Queen-sized Bed", true, 2, 320);
 
-            List<HotelReservation> hrList1 = new List<HotelReservation> { hr1, hr2 };
-            List<HotelReservation> hrList2 = new List<HotelReservation> { hr3, hr4 };
-            List<HotelReservation> hrList3 = new List<HotelReservation> { hr5, hr6 };
-            List<HotelReservation> hrList4 = new List<HotelReservation> { hr7, hr8 };
-            List<HotelReservation> hrList5 = new List<HotelReservation> { hr9, hr10 };
+            List<Room> roomList1 = new List<Room> { room1, room2 };
+            List<Room> roomList2 = new List<Room> { room3, room4 };
+            List<Room> roomList3 = new List<Room> { room5, room6 };
+            List<Room> roomList4 = new List<Room> { room7, room8 };
+            List<Room> roomList5 = new List<Room> { room9, room10 };
 
-            Hotel luxuryHotel = new Hotel("Luxurious Palace", "21 Orchard Rd", "Luxury", 5, true, facilities1, hrList1);
-            Hotel themedHotel = new Hotel("SkyHigh Hotel", "Bugis St 99", "Themed", 3, true, facilities2, hrList2);
-            Hotel cityHotel = new Hotel("Central City Hotel", "184 Newton Rd", "City", 2, true, facilities3, hrList3);
-            Hotel budgetHotel = new Hotel("Budget101", "123 Toa Payoh Rd", "Budget", 4, true, facilities4, hrList4);
-            Hotel ffHotel = new Hotel("FF Hotel", "Changi Rd", "Family-Friendly", 3, true, facilities5, hrList5);
-
+            Hotel luxuryHotel = new Hotel("Luxurious Palace", "21 Orchard Rd", "Luxury", 5, true, facilities1, roomList1);
+            Hotel themedHotel = new Hotel("SkyHigh Hotel", "Bugis St 99", "Themed", 3, true, facilities2, roomList2);
+            Hotel cityHotel = new Hotel("Central City Hotel", "184 Newton Rd", "City", 2, true, facilities3, roomList3);
+            Hotel budgetHotel = new Hotel("Budget101", "123 Toa Payoh Rd", "Budget", 4, true, facilities4, roomList4);
+            Hotel ffHotel = new Hotel("FF Hotel", "Changi Rd", "Family-Friendly", 3, true, facilities5, roomList5);
 
 
             while (true)
@@ -129,6 +128,11 @@ namespace SE_Assignment
                                         switch (input)
                                         {
                                             case 1:
+                                                // for loop display rooms
+                                                foreach (Room rm in roomList1)
+                                                {
+                                                    Console.WriteLine("Room: Bed Type:{0} Breakfast Served: {1} Max Guests: {2} Cost per night: ${3}", rm.BedType, rm.BreakfastServed, rm.MaxGuest, rm.CostPerNight);
+                                                }
                                                 continue;
                                             case 2:
                                                 continue;

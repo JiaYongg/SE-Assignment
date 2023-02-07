@@ -41,6 +41,14 @@ namespace SE_Assignment
             set { costPerNight = value; }
         }
 
+        public Room(int num, string bedType, bool breakfastServed, int maxGuest, double costNight) 
+        {
+            RoomNum = num;
+            BedType = bedType;
+            BreakfastServed = breakfastServed;
+            MaxGuest = maxGuest;
+            CostPerNight = costNight;
+        }
     }
 
 }

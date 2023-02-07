@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,7 @@ namespace SE_Assignment
         private string location;
         private string category;
         private List<string> facilityList;
-        private List<HotelReservation> hrList;
+        private List<Room> roomList;
         private int numStars;
         private bool voucherAllow;
         public string Name
@@ -40,7 +41,7 @@ namespace SE_Assignment
             get { return voucherAllow; }
             set { voucherAllow = value; }
         }
-        public Hotel(string name, string location, string category, int numstars, bool voucherallow, List<string> fList, List<HotelReservation> hrlist)
+        public Hotel(string name, string location, string category, int numstars, bool voucherallow, List<string> fList, List<Room> rlist)
         {
             Name = name;
             Location = location;
@@ -49,7 +50,7 @@ namespace SE_Assignment
             VoucherAllow = voucherallow;
 
             facilityList = fList;
-            hrList = hrlist;
+            roomList = rlist;
         }
 
         public int calcStars()
@@ -58,11 +59,11 @@ namespace SE_Assignment
         }
 
         // adds to the parksession list
-        public void addHotelReservation(HotelReservation hr)
+        public void addHotelReservation(Room rm)
         {
-            if (!hrList.Contains(hr))
+            if (!roomList.Contains(rm))
             {
-                hrList.Add(hr);
+                roomList.Add(rm);
             }
             else
             {
