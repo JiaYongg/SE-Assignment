@@ -140,9 +140,11 @@ namespace SE_Assignment
 
         public void displayReservations()
         {
+            Console.WriteLine("{0,-15} {1,-15} {2,-15} {3,-10}", "Check-In Date", "Check-Out Date", "Status", "Cost");
             foreach (Reservation re in reservationList)
             {
                 //implementation
+                Console.WriteLine("{0,-15} {1,-15} {2,-15} ${3,-10:#.00}", re.CheckInDate.ToString("dd/MM/yyyy"), re.CheckOutDate.ToString("dd/MM/yyyy"), re.Status, re.ReservationCost);
             }
         }
 
