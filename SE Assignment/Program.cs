@@ -244,21 +244,28 @@ namespace SE_Assignment
                                                         return;
                                                 }
                                             case 5:
-
-                                                Console.WriteLine("You currently have ${0:#.00} in your account balance.", g.Balance);
-                                                Console.WriteLine("------------Menu------------");
-                                                Console.WriteLine("1) Top up");
-                                                Console.WriteLine("2) Exit");
-
-                                                switch (EnterOption())
+                                                bool inAccBal = true;
+                                                while (inAccBal)
                                                 {
-                                                    case 1:
-                                                        //user.topUp();
-                                                        return;
-                                                    case 2:
-                                                        continue;
+                                                    Console.WriteLine("You currently have ${0:#.00} in your account balance.", g.Balance);
+                                                    Console.WriteLine("------------Menu------------");
+                                                    Console.WriteLine("1) Top up");
+                                                    Console.WriteLine("0) Exit");
+                                                    Console.WriteLine();
+                                                    Console.Write("Enter choice: ");
+                                                    input = Convert.ToInt32(Console.ReadLine());
+                                                    switch (input)
+                                                    {
+                                                        case 1:
+                                                            g.topUp();
+                                                            continue;
+                                                        case 0:
+                                                            inAccBal = false;
+                                                            break;
+                                                    }
                                                 }
-                                                return;
+                                                continue;
+
                                             case 0:
                                                 inGuestMenu = false;
                                                 break;
