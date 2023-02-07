@@ -38,19 +38,19 @@ namespace SE_Assignment
             set { reservationCost = value; }
         }
 
-        public bool Status
+        public string Status
         {
             get { return status; }
             set { status = value; }
         }
 
-        public Reservation(string id, DateTime checkIn, DateTime checkout, int costs, bool iscancelled)
+        public Reservation(string id, DateTime checkIn, DateTime checkout, int costs, string status)
         {
             ReservationId = id;
             CheckInDate = checkIn;
             CheckOutDate = checkout;
             ReservationCost = costs;
-            IsCancelled = iscancelled;
+            Status = status;
         }
 
         public void checkIn()
