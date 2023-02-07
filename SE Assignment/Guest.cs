@@ -133,6 +133,7 @@ namespace SE_Assignment
                     {
                         balance += tpamt;
                         Console.WriteLine(String.Format("${0} has been topped up to your account. Your total balance is now ${1}", tpamt, balance));
+                        break;
                     }
                 }
             }
