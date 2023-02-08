@@ -16,8 +16,6 @@ namespace SE_Assignment
         public HotelIterator(HotelList list)
         {
             hotelList = list;
-                
-
         }
         public bool hasNext()
         {
@@ -32,18 +30,14 @@ namespace SE_Assignment
         }
         public object next()
         {
-            ++position;
-            if (position < hotelList.numHotels)
+            Hotel hotel = hotelList.HotelCollection[position];
+            while (position < hotelList.numHotels)
             {
-                return hotelList.HotelCollection[position];
+                position++;
+                break;
             }
-            else
-            {
-                return null;
-            }
+            return hotel;
 
-
-            
         }
         public void remove()
         {
