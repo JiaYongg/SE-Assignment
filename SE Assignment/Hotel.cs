@@ -48,6 +48,16 @@ namespace SE_Assignment
             get { return voucherAllow; }
             set { voucherAllow = value; }
         }
+        public List<string> FacilityList
+        {
+            get { return facilityList; }
+            set { facilityList = value; }
+        }
+        public List<RoomType> RoomTypeList
+        {
+            get { return roomTypeList; }
+            set { roomTypeList = value; }
+        }
         public Hotel(string name, string location, string category, int numstars, bool voucherallow, List<string> fList, List<RoomType> rtlist)
         {
             Name = name;

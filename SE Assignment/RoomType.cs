@@ -9,7 +9,7 @@ namespace SE_Assignment
     public class RoomType
     {
         private string bedType;
-        private bool breakfastServed;
+        private string breakfastServed;
         private int maxGuest;
         private double costPerNight;
 
@@ -18,7 +18,7 @@ namespace SE_Assignment
             get { return bedType; }
             set { bedType = value; }
         }
-        public bool BreakfastServed
+        public string BreakfastServed
         {
             get { return breakfastServed; }
             set { breakfastServed = value; }
@@ -34,7 +34,7 @@ namespace SE_Assignment
             set { costPerNight = value; }
         }
 
-        public RoomType(string bedType, bool breakfastServed, int maxGuest, double costNight) 
+        public RoomType(string bedType, string breakfastServed, int maxGuest, double costNight) 
         {
             BedType = bedType;
             BreakfastServed = breakfastServed;
