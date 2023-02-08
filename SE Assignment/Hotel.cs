@@ -9,13 +9,20 @@ namespace SE_Assignment
 {
     public class Hotel
     {
+        private string hotelID;
         private string name;
         private string location;
         private string category;
         private List<string> facilityList;
-        private List<Room> roomList;
+        private List<RoomType> roomTypeList;
         private int numStars;
         private bool voucherAllow;
+
+        public string HotelID
+        {
+            get { return hotelID; }
+            set { hotelID = value; }
+        }
         public string Name
         {
             get { return name; }
@@ -41,7 +48,17 @@ namespace SE_Assignment
             get { return voucherAllow; }
             set { voucherAllow = value; }
         }
-        public Hotel(string name, string location, string category, int numstars, bool voucherallow, List<string> fList, List<Room> rlist)
+        public List<string> FacilityList
+        {
+            get { return facilityList; }
+            set { facilityList = value; }
+        }
+        public List<RoomType> RoomTypeList
+        {
+            get { return roomTypeList; }
+            set { roomTypeList = value; }
+        }
+        public Hotel(string name, string location, string category, int numstars, bool voucherallow, List<string> fList, List<RoomType> rtlist)
         {
             Name = name;
             Location = location;
@@ -50,7 +67,7 @@ namespace SE_Assignment
             VoucherAllow = voucherallow;
 
             facilityList = fList;
-            roomList = rlist;
+            roomTypeList = rtlist;
         }
 
         public int calcStars()
@@ -59,11 +76,11 @@ namespace SE_Assignment
         }
 
         // adds to the parksession list
-        public void addHotelReservation(Room rm)
+        public void addHotelReservation(RoomType rt)
         {
-            if (!roomList.Contains(rm))
+            if (!roomTypeList.Contains(rt))
             {
-                roomList.Add(rm);
+                roomTypeList.Add(rt);
             }
             else
             {

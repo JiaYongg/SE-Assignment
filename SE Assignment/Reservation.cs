@@ -65,7 +65,7 @@ namespace SE_Assignment
             Console.WriteLine("Check Out Date: " + CheckOutDate);
         }
 
-        public double calculateCost(Room rm)
+        public double calculateCost(RoomType rm)
         {
             double cost = (CheckOutDate - CheckInDate).TotalDays * rm.CostPerNight;
             return cost;

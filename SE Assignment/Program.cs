@@ -57,28 +57,42 @@ namespace SE_Assignment
             List<string> facilities4 = new List<string> { "Gym", "Swimming Pool" };
             List<string> facilities5 = new List<string> { "Gym", "Swimming Pool", "Lounge", "Sauna" };
 
-            Room room1 = new Room(101, "King-sized Bed", true, 2,  470);
-            Room room2 = new Room(102, "Queen-sized Bed", false, 2, 420);
-            Room room3 = new Room(103, "Single Bed", true, 1, 140);
-            Room room4 = new Room(104, "Double Bed", true, 2, 220);
-            Room room5 = new Room(105, "Single Bed", false, 1, 580);
-            Room room6 = new Room(106, "Double Bed", true, 2, 450);
-            Room room7 = new Room(107, "Double King-sized Bed", true, 4, 840);
-            Room room8 = new Room(108, "Double Queen-sized Bed", false, 4, 480);
-            Room room9 = new Room(109, "King-sized Bed", false, 2, 540);
-            Room room10 = new Room(110, "Queen-sized Bed", true, 2, 320);
+            RoomType roomType1 = new RoomType("King-sized Bed", "Yes", 2, 470);
+            RoomType roomType2 = new RoomType("Queen-sized Bed", "No", 2, 420);
+            RoomType roomType3 = new RoomType("Single Bed", "Yes", 1, 140);
+            RoomType roomType4 = new RoomType("Double Bed", "Yes", 2, 220);
+            RoomType roomType5 = new RoomType("Single Bed", "No", 1, 580);
+            RoomType roomType6 = new RoomType("Double Bed", "Yes", 2, 450);
+            RoomType roomType7 = new RoomType("Double King-sized Bed", "Yes", 4, 840);
+            RoomType roomType8 = new RoomType("Double Queen-sized Bed", "No", 4, 480);
+            RoomType roomType9 = new RoomType("King-sized Bed", "No", 2, 540);
+            RoomType roomType10 = new RoomType("Queen-sized Bed", "Yes", 2, 320);
 
-            List<Room> roomList1 = new List<Room> { room1, room2 };
-            List<Room> roomList2 = new List<Room> { room3, room4 };
-            List<Room> roomList3 = new List<Room> { room5, room6 };
-            List<Room> roomList4 = new List<Room> { room7, room8 };
-            List<Room> roomList5 = new List<Room> { room9, room10 };
+            List<RoomType> roomTypeList1 = new List<RoomType> { roomType1, roomType2 };
+            List<RoomType> roomTypeList2 = new List<RoomType> { roomType3, roomType4 };
+            List<RoomType> roomTypeList3 = new List<RoomType> { roomType5, roomType6 };
+            List<RoomType> roomTypeList4 = new List<RoomType> { roomType7, roomType8 };
+            List<RoomType> roomTypeList5 = new List<RoomType> { roomType9, roomType10 };
 
-            Hotel luxuryHotel = new Hotel("Luxurious Palace", "21 Orchard Rd", "Luxury", 5, true, facilities1, roomList1);
-            Hotel themedHotel = new Hotel("SkyHigh Hotel", "Bugis St 99", "Themed", 3, true, facilities2, roomList2);
-            Hotel cityHotel = new Hotel("Central City Hotel", "184 Newton Rd", "City", 2, true, facilities3, roomList3);
-            Hotel budgetHotel = new Hotel("Budget101", "123 Toa Payoh Rd", "Budget", 4, true, facilities4, roomList4);
-            Hotel ffHotel = new Hotel("FF Hotel", "Changi Rd", "Family-Friendly", 3, true, facilities5, roomList5);
+            RoomTypeReservation rtr1 = new RoomTypeReservation(reservation1, roomType1);
+            RoomTypeReservation rtr2 = new RoomTypeReservation(reservation2, roomType2);
+            RoomTypeReservation rtr3 = new RoomTypeReservation(reservation3, roomType3);
+            RoomTypeReservation rtr4 = new RoomTypeReservation(reservation4, roomType4);
+            RoomTypeReservation rtr5 = new RoomTypeReservation(reservation5, roomType5);
+
+            Hotel luxuryHotel = new Hotel("Luxurious Palace", "21 Orchard Rd", "Luxury", 5, true, facilities1, roomTypeList1);
+            Hotel themedHotel = new Hotel("SkyHigh Hotel", "Bugis St 99", "Themed", 3, true, facilities2, roomTypeList2);
+            Hotel cityHotel = new Hotel("Central City Hotel", "184 Newton Rd", "City", 2, true, facilities3, roomTypeList3);
+            Hotel budgetHotel = new Hotel("Budget101", "123 Toa Payoh Rd", "Budget", 4, true, facilities4, roomTypeList4);
+            Hotel ffHotel = new Hotel("FF Hotel", "Changi Rd", "Family-Friendly", 3, true, facilities5, roomTypeList5);
+
+            // Add all hotels to hotelcollection
+            HotelList hotelList = new HotelList();
+            hotelList.HotelCollection.Add(luxuryHotel);
+            hotelList.HotelCollection.Add(themedHotel);
+            hotelList.HotelCollection.Add(cityHotel);
+            hotelList.HotelCollection.Add(budgetHotel);
+            hotelList.HotelCollection.Add(ffHotel);
 
 
             while (true)
@@ -128,10 +142,16 @@ namespace SE_Assignment
                                         switch (input)
                                         {
                                             case 1:
-                                                // for loop display rooms
-                                                foreach (Room rm in roomList1)
+                                                Console.WriteLine("{0,-30} {1,-10} {2,-20} ${3,-5}", "Bed Type", "MaxGuest", "Breakfast Served", "Cost Per Night");
+                                                HotelIterator hotelIterator = new HotelIterator(hotelList);
+                                                while (hotelIterator.hasNext())
                                                 {
-                                                    Console.WriteLine("Room: Bed Type:{0} Breakfast Served: {1} Max Guests: {2} Cost per night: ${3}", rm.BedType, rm.BreakfastServed, rm.MaxGuest, rm.CostPerNight);
+                                                    Hotel hotel = (Hotel)hotelIterator.next();
+                                                    foreach (RoomType rt in hotel.RoomTypeList)
+                                                    {
+                                                        Console.WriteLine("{0,-30} {1,-10} {2,-20} ${3,-5:#.00}", rt.BedType, rt.MaxGuest, rt.BreakfastServed, rt.CostPerNight);
+                                                    }
+
                                                 }
                                                 continue;
                                             case 2:
