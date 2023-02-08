@@ -9,7 +9,7 @@ namespace SE_Assignment
     public class HotelRating
     {
         private string ratingId;
-        private int ratingStars;
+        private double ratingStars;
         private string comments;
 
         public string RatingId
@@ -18,7 +18,7 @@ namespace SE_Assignment
             set { ratingId = value; }
         }
 
-        public int RatingStars
+        public double RatingStars
         {
             get { return ratingStars; }
             set { ratingStars = value; }
@@ -32,7 +32,7 @@ namespace SE_Assignment
 
         public HotelRating() { }
 
-        public HotelRating(string id, int stars, string comment)
+        public HotelRating(string id, double stars, string comment)
         {
             RatingId = id;
             RatingStars = stars;
