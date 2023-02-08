@@ -58,8 +58,9 @@ namespace SE_Assignment
             get { return roomTypeList; }
             set { roomTypeList = value; }
         }
-        public Hotel(string name, string location, string category, double numstars, bool voucherallow, List<string> fList, List<RoomType> rtlist)
+        public Hotel(string hid, string name, string location, string category, double numstars, bool voucherallow, List<string> fList, List<RoomType> rtlist)
         {
+            HotelID = hid;
             Name = name;
             Location = location;
             Category = category;
@@ -70,9 +71,9 @@ namespace SE_Assignment
             roomTypeList = rtlist;
         }
 
-        public int calcStars()
+        public void calcStars(double totalStars, double count)
         {
-            return 0;
+            numStars = totalStars / count;
         }
 
         // adds to the parksession list
