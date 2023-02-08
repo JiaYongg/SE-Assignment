@@ -79,6 +79,7 @@ namespace SE_Assignment
             RoomTypeReservation rtr3 = new RoomTypeReservation(reservation3, roomType3);
             RoomTypeReservation rtr4 = new RoomTypeReservation(reservation4, roomType4);
             RoomTypeReservation rtr5 = new RoomTypeReservation(reservation5, roomType5);
+            List<RoomTypeReservation> rtrList = new List<RoomTypeReservation> { rtr1, rtr2, rtr3, rtr4, rtr5 };
 
             Hotel luxuryHotel = new Hotel("Luxurious Palace", "21 Orchard Rd", "Luxury", 5, true, facilities1, roomTypeList1);
             Hotel themedHotel = new Hotel("SkyHigh Hotel", "Bugis St 99", "Themed", 3, true, facilities2, roomTypeList2);
@@ -394,6 +395,17 @@ namespace SE_Assignment
                                                                         DateTime newCIDate = DateTime.Now;
                                                                         DateTime newCODate = DateTime.Now;
 
+                                                                        //Reservation reservation;
+                                                                        //foreach (Reservation r in reservationList)
+                                                                        //{
+                                                                        //    if (r.ReservationId == editID)
+                                                                        //    {
+                                                                        //        reservation = r;
+                                                                        //    }
+                                                                        //}
+
+                                                                        //reservation.isRoomAvail(reservationList, rtrList,)
+
                                                                         while (!((newCIDate.Day - DateTime.Now.Day) >= 2) || !((newCODate.Day - newCIDate.Day) > 0))
                                                                         {
                                                                             Console.Write("Enter New Check-In Date: ");
@@ -530,6 +542,34 @@ namespace SE_Assignment
                 }
             }
             return main_choice;
+        }
+
+        public bool isRoomAvail(List<Reservation> rList, List<RoomTypeReservation> rtrList, RoomType rt, DateTime checkIn, DateTime checkOut)
+        {
+
+            foreach (Reservation r in rList)
+            {
+                foreach (RoomTypeReservation rtr in rtrList)
+                {
+                    if (rtr.RoomType == rt)
+                    {
+                        if (!(checkIn > r.CheckOutDate))
+                        {
+                            return false;
+                        }
+                        else if (!(checkOut < r.CheckInDate))
+                        {
+                            return false;
+                        }
+                        else if (!(checkIn == r.CheckInDate))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            return true;
         }
 
     }
