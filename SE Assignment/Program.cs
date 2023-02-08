@@ -210,7 +210,7 @@ namespace SE_Assignment
 
                                                                             if (!((newCIDate.Day - DateTime.Now.Day) >= 2))
                                                                             {
-                                                                                Console.WriteLine("New Check-In Date must be more than 2 days from today!");
+                                                                                Console.WriteLine("Cancellation failed! Cancellation must not be 2 days before the check in date.");
                                                                             }
                                                                             else if ((newCODate.Day - newCIDate.Day) < 0)
                                                                             {
