@@ -142,16 +142,209 @@ namespace SE_Assignment
                                         switch (input)
                                         {
                                             case 1:
-                                                Console.WriteLine("{0,-30} {1,-10} {2,-20} ${3,-5}", "Bed Type", "MaxGuest", "Breakfast Served", "Cost Per Night");
-                                                HotelIterator hotelIterator = new HotelIterator(hotelList);
-                                                while (hotelIterator.hasNext())
+                                                Console.WriteLine("Would you like to search for rooms? ");
+                                                Console.WriteLine("1) Yes");
+                                                Console.WriteLine("2) No");
+                                                Console.WriteLine();
+                                                Console.Write("Enter choice: ");
+                                                input = Convert.ToInt32(Console.ReadLine());
+                                                // choosing the options
+                                                switch (input)
                                                 {
-                                                    Hotel hotel = (Hotel)hotelIterator.next();
-                                                    foreach (RoomType rt in hotel.RoomTypeList)
-                                                    {
-                                                        Console.WriteLine("{0,-30} {1,-10} {2,-20} ${3,-5:#.00}", rt.BedType, rt.MaxGuest, rt.BreakfastServed, rt.CostPerNight);
-                                                    }
+                                                    case 1: 
+                                                        Console.WriteLine("\nChoose search by:"); // guest’s budget, hotel type, review score, location and facilities
+                                                        Console.WriteLine("1) Budget");
+                                                        Console.WriteLine("2) Hotel Type");
+                                                        Console.WriteLine("3) Review Score");
+                                                        Console.WriteLine("4) Location");
+                                                        Console.WriteLine("5) Facilities");
 
+                                                        Console.Write("Enter choice: ");
+                                                        input = Convert.ToInt32(Console.ReadLine());
+                                                        switch (input)
+                                                        {
+                                                            case 0:
+                                                                continue;
+                                                            case 1:
+                                                                Console.Write("Enter max cost: ");
+                                                                int maxCost = Convert.ToInt32(Console.ReadLine());
+                                                                Console.WriteLine("{0,-30} {1,-10} {2,-20} ${3,-5} {4,-15} {5,-10} {6,-10}", "Bed Type", "MaxGuest", "Breakfast Served", "Cost Per Night", "Hotel Type", "Location", "Facilities");
+                                                                HotelIterator hotelIterator1 = new HotelIterator(hotelList);
+                                                                while (hotelIterator1.hasNext())
+                                                                {
+                                                                    StringBuilder sb = new StringBuilder();
+                                                                    Hotel hotel = (Hotel)hotelIterator1.next();
+                                                                    for (int i = 0; i < hotel.FacilityList.Count; i++)
+                                                                    {
+                                                                        if (i == hotel.FacilityList.Count - 1)
+                                                                        {
+                                                                            sb.Append(hotel.FacilityList[i]);
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            sb.Append(hotel.FacilityList[i] + ", ");
+                                                                        }
+                                                                    }
+                                                                    foreach (RoomType rt in hotel.RoomTypeList)
+                                                                    {
+                                                                        if (rt.CostPerNight >= maxCost)
+                                                                        {
+                                                                            Console.WriteLine("{0,-30} {1,-10} {2,-20} ${3,-10:#.00} {4,-20} {5,-10} {6,-10}", rt.BedType, rt.MaxGuest, rt.BreakfastServed, rt.CostPerNight, hotel.Category, hotel.Location, sb);
+                                                                        }
+                                                                    }
+                                                                }
+                                                                continue;
+                                                            case 2:
+                                                                Console.Write("Enter Hotel Type: ");
+                                                                string type = Console.ReadLine();
+                                                                Console.WriteLine("{0,-30} {1,-10} {2,-20} ${3,-5} {4,-15} {5,-10} {6,-10}", "Bed Type", "MaxGuest", "Breakfast Served", "Cost Per Night", "Hotel Type", "Location", "Facilities");
+                                                                HotelIterator hotelIterator2 = new HotelIterator(hotelList);
+                                                                while (hotelIterator2.hasNext())
+                                                                {
+                                                                    StringBuilder sb = new StringBuilder();
+                                                                    Hotel hotel = (Hotel)hotelIterator2.next();
+                                                                    for (int i = 0; i < hotel.FacilityList.Count; i++)
+                                                                    {
+                                                                        if (i == hotel.FacilityList.Count - 1)
+                                                                        {
+                                                                            sb.Append(hotel.FacilityList[i]);
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            sb.Append(hotel.FacilityList[i] + ", ");
+                                                                        }
+                                                                    }
+                                                                    foreach (RoomType rt in hotel.RoomTypeList)
+                                                                    {
+                                                                        if (hotel.Category == type)
+                                                                        {
+                                                                            Console.WriteLine("{0,-30} {1,-10} {2,-20} ${3,-10:#.00} {4,-20} {5,-10} {6,-10}", rt.BedType, rt.MaxGuest, rt.BreakfastServed, rt.CostPerNight, hotel.Category, hotel.Location, sb);
+                                                                        }
+                                                                    }
+                                                                }
+                                                                continue;
+                                                            case 3:
+                                                                Console.Write("Enter Rating: ");
+                                                                int stars = Convert.ToInt32(Console.ReadLine());
+                                                                Console.WriteLine("{0,-30} {1,-10} {2,-20} ${3,-5} {4,-15} {5,-10} {6,-10}", "Bed Type", "MaxGuest", "Breakfast Served", "Cost Per Night", "Hotel Type", "Location", "Facilities");
+                                                                HotelIterator hotelIterator3 = new HotelIterator(hotelList);
+                                                                while (hotelIterator3.hasNext())
+                                                                {
+                                                                    StringBuilder sb = new StringBuilder();
+                                                                    Hotel hotel = (Hotel)hotelIterator3.next();
+                                                                    for (int i = 0; i < hotel.FacilityList.Count; i++)
+                                                                    {
+                                                                        if (i == hotel.FacilityList.Count - 1)
+                                                                        {
+                                                                            sb.Append(hotel.FacilityList[i]);
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            sb.Append(hotel.FacilityList[i] + ", ");
+                                                                        }
+                                                                    }
+                                                                    foreach (RoomType rt in hotel.RoomTypeList)
+                                                                    {
+                                                                        if (hotel.NumStars >= stars)
+                                                                        {
+                                                                            Console.WriteLine("{0,-30} {1,-10} {2,-20} ${3,-10:#.00} {4,-20} {5,-10} {6,-10}", rt.BedType, rt.MaxGuest, rt.BreakfastServed, rt.CostPerNight, hotel.Category, hotel.Location, sb);
+                                                                        }
+                                                                    }
+                                                                }
+                                                                continue;
+                                                            case 4:
+                                                                Console.Write("Enter location: ");
+                                                                string location = Console.ReadLine();
+                                                                Console.WriteLine("{0,-30} {1,-10} {2,-20} ${3,-5} {4,-15} {5,-10} {6,-10}", "Bed Type", "MaxGuest", "Breakfast Served", "Cost Per Night", "Hotel Type", "Location", "Facilities");
+                                                                HotelIterator hotelIterator4 = new HotelIterator(hotelList);
+                                                                while (hotelIterator4.hasNext())
+                                                                {
+                                                                    StringBuilder sb = new StringBuilder();
+                                                                    Hotel hotel = (Hotel)hotelIterator4.next();
+                                                                    for (int i = 0; i < hotel.FacilityList.Count; i++)
+                                                                    {
+                                                                        if (i == hotel.FacilityList.Count - 1)
+                                                                        {
+                                                                            sb.Append(hotel.FacilityList[i]);
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            sb.Append(hotel.FacilityList[i] + ", ");
+                                                                        }
+                                                                    }
+                                                                    foreach (RoomType rt in hotel.RoomTypeList)
+                                                                    {
+                                                                        if (hotel.Location == location)
+                                                                        {
+                                                                            Console.WriteLine("{0,-30} {1,-10} {2,-20} ${3,-10:#.00} {4,-20} {5,-20} {6,-10}", rt.BedType, rt.MaxGuest, rt.BreakfastServed, rt.CostPerNight, hotel.Category, hotel.Location, sb);
+                                                                        }
+                                                                    }
+                                                                }
+                                                                continue;
+                                                            case 5:
+                                                                Console.Write("Enter facilities: ");
+                                                                string facilities = Console.ReadLine();
+                                                                Console.WriteLine("{0,-30} {1,-10} {2,-20} ${3,-5} {4,-15} {5,-10} {6,-10}", "Bed Type", "MaxGuest", "Breakfast Served", "Cost Per Night", "Hotel Type", "Location", "Facilities");
+                                                                HotelIterator hotelIterator5 = new HotelIterator(hotelList);
+                                                                while (hotelIterator5.hasNext())
+                                                                {
+                                                                    StringBuilder sb = new StringBuilder();
+                                                                    Hotel hotel = (Hotel)hotelIterator5.next();
+                                                                    for (int i = 0; i < hotel.FacilityList.Count; i++)
+                                                                    {
+                                                                        if (i == hotel.FacilityList.Count - 1)
+                                                                        {
+                                                                            sb.Append(hotel.FacilityList[i]);
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            sb.Append(hotel.FacilityList[i] + ", ");
+                                                                        }
+                                                                    }
+                                                                    foreach (RoomType rt in hotel.RoomTypeList)
+                                                                    {
+                                                                        string allFac = sb.ToString();
+                                                                        if (allFac.Contains(facilities))
+                                                                        {
+                                                                            //if (allFac.Contains(facilities))
+                                                                            //{
+                                                                            //    Console.WriteLine("It Does");
+                                                                            //}
+                                                                            //else
+                                                                            //{
+                                                                            //    Console.WriteLine("It Does Not");
+                                                                            //}
+                                                                            Console.WriteLine("{0,-30} {1,-10} {2,-20} ${3,-10:#.00} {4,-20} {5,-32} {6,-10}", rt.BedType, rt.MaxGuest, rt.BreakfastServed, rt.CostPerNight, hotel.Category, hotel.Location, sb);
+                                                                        }
+                                                                    }
+                                                                }
+                                                                continue;                                                            
+                                                        }
+                                                        continue;
+                                                    case 2:
+                                                        Console.WriteLine("{0,-30} {1,-10} {2,-20} ${3,-5} {4,-15} {5,-10} {6,-10}", "Bed Type", "MaxGuest", "Breakfast Served", "Cost Per Night", "Hotel Type", "Location", "Facilities");
+                                                        HotelIterator hotelIterator = new HotelIterator(hotelList);                                                        
+                                                        while (hotelIterator.hasNext())
+                                                        {
+                                                            StringBuilder sb = new StringBuilder();
+                                                            Hotel hotel = (Hotel)hotelIterator.next();
+                                                            for (int i = 0; i < hotel.FacilityList.Count; i++)
+                                                            {
+                                                                if (i == hotel.FacilityList.Count - 1)
+                                                                {
+                                                                    sb.Append(hotel.FacilityList[i]);
+                                                                }
+                                                                else
+                                                                {
+                                                                    sb.Append(hotel.FacilityList[i] + ", ");
+                                                                }
+                                                            }                                                                
+                                                            foreach (RoomType rt in hotel.RoomTypeList)
+                                                            {
+                                                                Console.WriteLine("{0,-30} {1,-10} {2,-20} ${3,-10:#.00} {4,-20} {5,-10} {6,-10}", rt.BedType, rt.MaxGuest, rt.BreakfastServed, rt.CostPerNight, hotel.Category, hotel.Location, sb);
+                                                            }
+                                                        }
+                                                        continue;
                                                 }
                                                 continue;
                                             case 2:
