@@ -15,7 +15,7 @@ namespace SE_Assignment
         private string category;
         private List<string> facilityList;
         private List<RoomType> roomTypeList;
-        private int numStars;
+        private double numStars;
         private bool voucherAllow;
 
         public string HotelID
@@ -38,7 +38,7 @@ namespace SE_Assignment
             get { return category; }
             set { category = value; }
         }
-        public int NumStars
+        public double NumStars
         {
             get { return numStars; }
             set { numStars = value; }
@@ -58,7 +58,7 @@ namespace SE_Assignment
             get { return roomTypeList; }
             set { roomTypeList = value; }
         }
-        public Hotel(string name, string location, string category, int numstars, bool voucherallow, List<string> fList, List<RoomType> rtlist)
+        public Hotel(string name, string location, string category, double numstars, bool voucherallow, List<string> fList, List<RoomType> rtlist)
         {
             Name = name;
             Location = location;
