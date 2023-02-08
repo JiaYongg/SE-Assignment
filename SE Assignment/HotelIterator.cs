@@ -8,30 +8,42 @@ namespace SE_Assignment
 {
     public class HotelIterator
     {
-        private List<Hotel> hotels;
+        private HotelList hotelList;
         private int position = 0;
+        //private string hotelID;
+        public bool isFound = false;
 
-        public HotelIterator(List<Hotel> hotels)
+        public HotelIterator(HotelList list)
         {
-            this.hotels = hotels;
+            hotelList = list;
+                
+
         }
         public bool hasNext()
         {
-            if (position < hotels.Count)
+            if (position < hotelList.numHotels)
             {
                 return true;
             }
-            return false;
+            else
+            {
+                return false;
+            }
         }
         public object next()
         {
-            Hotel hotel = hotels[position];
-            position++;
-            while (position < hotels.Count)
+            ++position;
+            if (position < hotelList.numHotels)
             {
-                position++;
+                return hotelList.HotelCollection[position];
             }
-            return hotel;
+            else
+            {
+                return null;
+            }
+
+
+            
         }
         public void remove()
         {
