@@ -81,9 +81,20 @@ namespace SE_Assignment
             {
                 if (rid == re.ReservationId)
                 {
-                    re.Status = "Cancelled";
-                    Console.WriteLine("Reservation has been successfully cancelled.");
+                    Console.Write("Are you sure you want to cancel the booking: ");
+                    string option = Console.ReadLine();
+
+                    if (option == "yes")
+                    {
+                        re.Status = "Cancelled";
+                        balance += re.ReservationCost;
+                        Console.WriteLine("Reservation has been successfully cancelled.");
+                        // need to check if theres voucher applied in the reservation
+                        Console.WriteLine("Your total balance is now {0:#.00}", balance);
+                        break;
+                    }
                     break;
+
                 }
                 else
                 {

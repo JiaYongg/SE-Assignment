@@ -71,7 +71,7 @@ namespace SE_Assignment
             return cost;
         }
 
-        public bool isRoomAvail()
+        public bool isRoomAvail(List<Reservation> rList, List<RoomType> rmList, RoomType rt, DateTime checkIn, DateTime checkout)
         {
             //if (isRoomAvail)
             //{
@@ -81,6 +81,13 @@ namespace SE_Assignment
             //{
             //    return false;
             //}
+            //foreach (Reservation r in rList)
+            //{
+            //    if ()
+            //}
+
+
+
             return true;
         }
     }

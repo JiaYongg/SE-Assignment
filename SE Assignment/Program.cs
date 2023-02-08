@@ -119,6 +119,7 @@ namespace SE_Assignment
                 // choosing the options
                 switch (input)
                 {
+                    // Login as Guest
                     case 1:
                         Console.Write("Enter NRIC: ");
                         string? nric = Console.ReadLine();
@@ -150,6 +151,7 @@ namespace SE_Assignment
                                         // choosing the options
                                         switch (input)
                                         {
+                                            // Browse Hotel Rooms
                                             case 1:
                                                 Console.WriteLine("Would you like to search for rooms? ");
                                                 Console.WriteLine("1) Yes");
@@ -160,6 +162,7 @@ namespace SE_Assignment
                                                 // choosing the options
                                                 switch (input)
                                                 {
+                                                    // Yes
                                                     case 1: 
                                                         Console.WriteLine("\nChoose search by:"); // guest’s budget, hotel type, review score, location and facilities
                                                         Console.WriteLine("1) Budget");
@@ -167,13 +170,16 @@ namespace SE_Assignment
                                                         Console.WriteLine("3) Review Score");
                                                         Console.WriteLine("4) Location");
                                                         Console.WriteLine("5) Facilities");
+                                                        Console.WriteLine("0) Exit");
 
                                                         Console.Write("Enter choice: ");
                                                         input = Convert.ToInt32(Console.ReadLine());
                                                         switch (input)
                                                         {
+                                                            // Exit
                                                             case 0:
                                                                 continue;
+                                                            // Search By Budget
                                                             case 1:
                                                                 Console.Write("Enter max cost: ");
                                                                 int maxCost = Convert.ToInt32(Console.ReadLine());
@@ -203,6 +209,7 @@ namespace SE_Assignment
                                                                     }
                                                                 }
                                                                 continue;
+                                                            // Search By Hotel Type
                                                             case 2:
                                                                 Console.Write("Enter Hotel Type: ");
                                                                 string type = Console.ReadLine();
@@ -232,6 +239,7 @@ namespace SE_Assignment
                                                                     }
                                                                 }
                                                                 continue;
+                                                            // Search by Review Score
                                                             case 3:
                                                                 Console.Write("Enter Rating: ");
                                                                 int stars = Convert.ToInt32(Console.ReadLine());
@@ -261,6 +269,7 @@ namespace SE_Assignment
                                                                     }
                                                                 }
                                                                 continue;
+                                                            // Search by Location
                                                             case 4:
                                                                 Console.Write("Enter location: ");
                                                                 string location = Console.ReadLine();
@@ -290,6 +299,7 @@ namespace SE_Assignment
                                                                     }
                                                                 }
                                                                 continue;
+                                                            // Search by Facilities
                                                             case 5:
                                                                 Console.Write("Enter facilities: ");
                                                                 string facilities = Console.ReadLine();
@@ -330,6 +340,7 @@ namespace SE_Assignment
                                                                 continue;                                                            
                                                         }
                                                         continue;
+                                                    // No
                                                     case 2:
                                                         Console.WriteLine("{0,-30} {1,-10} {2,-20} ${3,-5} {4,-15} {5,-10} {6,-10}", "Bed Type", "MaxGuest", "Breakfast Served", "Cost Per Night", "Hotel Type", "Location", "Facilities");
                                                         HotelIterator hotelIterator = new HotelIterator(hotelList);                                                        
@@ -356,8 +367,10 @@ namespace SE_Assignment
                                                         continue;
                                                 }
                                                 continue;
+                                            // Reserve Hotel Room
                                             case 2:
                                                 continue;
+                                            // View Reservation History
                                             case 3:
                                                 bool inReservationHistory = true;
                                                 while (inReservationHistory)
@@ -375,9 +388,11 @@ namespace SE_Assignment
                                                     input = Convert.ToInt32(Console.ReadLine());
                                                     switch (input)
                                                     {
+                                                        // Exit
                                                         case 0:
                                                             inReservationHistory = false;
                                                             continue;
+                                                        // Manage Reservation
                                                         case 1:
                                                             bool inManageReservations = true;
                                                             while (inManageReservations)
@@ -413,7 +428,7 @@ namespace SE_Assignment
 
                                                                             if (!((newCIDate.Day - DateTime.Now.Day) >= 2))
                                                                             {
-                                                                                Console.WriteLine("New Check-In Date must be more than 2 days from today!");
+                                                                                Console.WriteLine("Cancellation failed! Cancellation must not be 2 days before the check in date.");
                                                                             }
                                                                             else if ((newCODate.Day - newCIDate.Day) < 0)
                                                                             {
@@ -497,9 +512,8 @@ namespace SE_Assignment
                                                     }
                                                 }
                                                 continue;
-
+                                            // View Profile
                                             case 4:
-
                                                 Console.WriteLine("Name: {0,15}", g.Name);
                                                 Console.WriteLine("Contact Number: {0,10}", g.ContactNum);
                                                 Console.WriteLine("Email: {0,28}", g.Email);
@@ -515,6 +529,7 @@ namespace SE_Assignment
                                                         Console.WriteLine("Invalid Option!");
                                                         return;
                                                 }
+                                            // View Balance
                                             case 5:
                                                 bool inAccBal = true;
                                                 while (inAccBal)
@@ -537,7 +552,7 @@ namespace SE_Assignment
                                                     }
                                                 }
                                                 continue;
-
+                                            // Exit
                                             case 0:
                                                 inGuestMenu = false;
                                                 break;
@@ -553,10 +568,11 @@ namespace SE_Assignment
 
                         }
                         continue;
-
+                    // Login as Admin
                     case 2:
                         continue;
 
+                    // Exit
                     case 3:
                         return;
 
