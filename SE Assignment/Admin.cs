@@ -10,7 +10,6 @@ namespace SE_Assignment
     {
         private string adminID;
         private string adminPass;
-
         public string AdminID
         {
             get { return adminID; }
@@ -21,7 +20,27 @@ namespace SE_Assignment
             get { return adminPass; }
             set { adminPass = value; }
         }
+        public Admin(string aid, string apass)
+        {
+            adminID = aid;
+            adminPass = apass;
+        }
+        public void registerGuest(List<Guest> gList)
+        {
+            Console.Write("Enter Name: ");
+            string name = Console.ReadLine();
+            Console.Write("Enter NRIC: ");
+            string nric = Console.ReadLine();
+            Console.Write("Enter Contact Number: ");
+            string contact = Console.ReadLine();
+            Console.Write("Enter Email: ");
+            string email = Console.ReadLine();
 
+            Guest g = new Guest(name, Convert.ToString(gList.Count + 1), contact, email, nric, 0);
+            gList.Add(g);
 
+            Console.WriteLine("Guest Successfully Registered");
+
+        }
     }
 }

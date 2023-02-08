@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace SE_Assignment
 {
@@ -51,6 +54,11 @@ namespace SE_Assignment
             get { return balance; }
             set { balance = value; }
         }
+        public List<Reservation> ReservationList
+        {
+            get { return reservationList; }
+            set { reservationList = value; }
+        }
 
         public Guest(string name, string id, string contactNum, string email, string nric, double balance)
         {
@@ -73,9 +81,20 @@ namespace SE_Assignment
             {
                 if (rid == re.ReservationId)
                 {
-                    re.Status = "Cancelled";
-                    Console.WriteLine("Reservation has been successfully cancelled.");
+                    Console.Write("Are you sure you want to cancel the booking: ");
+                    string option = Console.ReadLine();
+
+                    if (option == "yes")
+                    {
+                        re.Status = "Cancelled";
+                        balance += re.ReservationCost;
+                        Console.WriteLine("Reservation has been successfully cancelled.");
+                        // need to check if theres voucher applied in the reservation
+                        Console.WriteLine("Your total balance is now {0:#.00}", balance);
+                        break;
+                    }
                     break;
+
                 }
                 else
                 {
@@ -102,10 +121,32 @@ namespace SE_Assignment
             }
         }
 
-        public void rateHotel()
+        public void rateHotel(string hid, double stars, string comment, List<HotelRating> hrtList, List<Hotel> hList)
         {
             // implementation
-
+            HotelRating hr = new HotelRating(hid, stars, comment);
+            hrtList.Add(hr);
+            double totalStars = 0;
+            int count = 0;
+            foreach (HotelRating hrt in hrtList)
+            {
+                if (hrt.RatingId == hid)
+                {
+                    totalStars += hrt.RatingStars;
+                    count++;
+                }
+                else
+                {
+                    continue;
+                }
+            }
+            foreach (Hotel h in hList)
+            {
+                if (h.HotelID == hid)
+                {
+                    h.calcStars(totalStars, count);
+                }
+            }
         }
 
         public void topUp()
