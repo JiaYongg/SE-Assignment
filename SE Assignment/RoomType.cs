@@ -6,19 +6,12 @@ using System.Threading.Tasks;
 
 namespace SE_Assignment
 {
-    public class Room
+    public class RoomType
     {
-        private int roomNum;
         private string bedType;
         private bool breakfastServed;
         private int maxGuest;
         private double costPerNight;
-
-        public int RoomNum
-        {
-            get { return roomNum; }
-            set { roomNum = value; }
-        }
 
         public string BedType
         {
@@ -41,9 +34,8 @@ namespace SE_Assignment
             set { costPerNight = value; }
         }
 
-        public Room(int num, string bedType, bool breakfastServed, int maxGuest, double costNight) 
+        public RoomType(string bedType, bool breakfastServed, int maxGuest, double costNight) 
         {
-            RoomNum = num;
             BedType = bedType;
             BreakfastServed = breakfastServed;
             MaxGuest = maxGuest;
