@@ -71,9 +71,9 @@ namespace SE_Assignment
             roomTypeList = rtlist;
         }
 
-        public int calcStars()
+        public void calcStars(double totalStars, double count)
         {
-            return 0;
+            numStars = totalStars / count;
         }
 
         // adds to the parksession list

@@ -80,6 +80,8 @@ namespace SE_Assignment
             RoomTypeReservation rtr4 = new RoomTypeReservation(reservation4, roomType4);
             RoomTypeReservation rtr5 = new RoomTypeReservation(reservation5, roomType5);
 
+            List<RoomTypeReservation> rtrList = new List<RoomTypeReservation> { rtr1, rtr2, rtr3, rtr4, rtr5 };
+
             Hotel luxuryHotel = new Hotel("Luxurious Palace", "21 Orchard Rd", "Luxury", 5, true, facilities1, roomTypeList1);
             Hotel themedHotel = new Hotel("SkyHigh Hotel", "Bugis St 99", "Themed", 3, true, facilities2, roomTypeList2);
             Hotel cityHotel = new Hotel("Central City Hotel", "184 Newton Rd", "City", 2, true, facilities3, roomTypeList3);
@@ -94,6 +96,13 @@ namespace SE_Assignment
             hotelList.HotelCollection.Add(budgetHotel);
             hotelList.HotelCollection.Add(ffHotel);
 
+            HotelRating hrt1 = new HotelRating("1", 5, "It was nice");
+            HotelRating hrt2 = new HotelRating("2", 4.3, "Pretty good");
+            HotelRating hrt3 = new HotelRating("3", 2.7, "Room was dirty");
+            HotelRating hrt4 = new HotelRating("4", 3.2, "Expected better service");
+            HotelRating hrt5 = new HotelRating("5", 5, "Excellent experience");
+
+            List<HotelRating> hrtList = new List<HotelRating> { hrt1, hrt2, hrt3, hrt4, hrt5 };
 
             while (true)
             {
@@ -371,6 +380,7 @@ namespace SE_Assignment
 
                                                     Console.WriteLine("------------Menu------------");
                                                     Console.WriteLine("1) Manage Reservations");
+                                                    Console.WriteLine("2) Rate Hotels");
                                                     Console.WriteLine("0) Exit");
                                                     Console.WriteLine();
 
@@ -445,6 +455,55 @@ namespace SE_Assignment
                                                                         return;
                                                                 }
 
+                                                            }
+                                                            continue;    
+                                                        case 2:
+                                                            bool inRateHotels = true;
+                                                            while (inRateHotels)
+                                                            {
+                                                                Console.WriteLine("------------Rate Hotels------------");
+                                                                Console.WriteLine("{0,-5} {1,-20}", "ID", "Hotel Name");
+                                                                foreach (Hotel h in hotelList.HotelCollection)
+                                                                {
+                                                                    foreach (Reservation r in g.ReservationList)
+                                                                    {
+                                                                        foreach (RoomTypeReservation rtr in rtrList)
+                                                                        {
+                                                                            if (rtr.Reservation.ReservationId == r.ReservationId && r.Status == "Fulfilled")
+                                                                            {
+                                                                                foreach (RoomType rt in h.RoomTypeList)
+                                                                                {
+                                                                                    if (rt == rtr.RoomType)
+                                                                                    {
+                                                                                        Console.WriteLine("{0,-5} {1,-20}", h.HotelID, h.Name);
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                                Console.WriteLine("------------Menu------------");
+                                                                Console.WriteLine("1) Select Hotel to give Rating");
+                                                                Console.WriteLine("0) Exit");
+                                                                Console.WriteLine();
+
+                                                                Console.Write("Enter choice: ");
+                                                                input = Convert.ToInt32(Console.ReadLine());
+                                                                switch (input)
+                                                                {
+                                                                    case 0:
+                                                                        inManageReservations = false;
+                                                                        continue;
+                                                                    case 1:
+                                                                        Console.Write("Enter Hotel ID: ");
+                                                                        string hid = Console.ReadLine();
+                                                                        Console.Write("Enter Number of Stars: ");
+                                                                        double stars = Convert.ToDouble(Console.ReadLine());
+                                                                        Console.Write("Enter Comments: ");
+                                                                        string comment = Console.ReadLine();
+                                                                        g.rateHotel(hid, stars, comment, hrtList, hotelList.HotelCollection);
+                                                                        continue;
+                                                                }
                                                             }
                                                             continue;
                                                         default:
