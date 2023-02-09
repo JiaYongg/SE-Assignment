@@ -28,6 +28,13 @@ namespace SE_Assignment
             set { expiryDate = value; }
         }
 
+        public Vouchers(string vid, double discAmt, DateTime expirydate)
+        {
+            VoucherId = vid;
+            DiscountAmt = discAmt;
+            ExpiryDate = expirydate;
+        }
+
         public bool isValid()
         {
             if (DateTime.Now > expiryDate)
