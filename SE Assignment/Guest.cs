@@ -174,7 +174,7 @@ namespace SE_Assignment
                     else if (tpamt > 0)
                     {
                         balance += tpamt;
-                        Console.WriteLine(String.Format("${0} has been topped up to your account. Your total balance is now ${1}", tpamt, balance));
+                        Console.WriteLine(String.Format("${0:#.00} has been topped up to your account. Your total balance is now ${1:#.00}", tpamt, balance));
                         break;
                     }
                 }
@@ -183,7 +183,7 @@ namespace SE_Assignment
 
         public void makePayment(Reservation r)
         {
-            Console.WriteLine("------------Menu------------");
+            string cardtype, cardno;
             Console.WriteLine("1) Pay by Account Balance");
             Console.WriteLine("2) Pay by Credit Card");
             Console.WriteLine("0) Exit");
@@ -198,22 +198,26 @@ namespace SE_Assignment
                         balance -= r.ReservationCost;
                         r.Status = "Confirmed";
                         Console.WriteLine("Reservation Paid Successfully!");
-                        Console.WriteLine("${0} has been deducted from your account balance. Your remaining balance is ${1}", Convert.ToString(r.ReservationCost), Convert.ToString(balance));
+                        Console.WriteLine("${0:#.00} has been deducted from your account balance. Your remaining balance is ${1:#.00}", r.ReservationCost, balance);
                     }
                     else if (balance < r.ReservationCost)
                     {
                         Console.WriteLine("Insufficient Funds, Would you like to pay the remaining with your credit card?");
                         Console.WriteLine("1) Yes");
                         Console.WriteLine("2) No");
+                        Console.WriteLine();
+                        Console.Write("Enter choice: ");
                         input = Convert.ToInt32(Console.ReadLine());
                         switch (input)
                         {
                             case 1:
                                 Console.Write("Enter Type of Card: ");
+                                cardtype = Console.ReadLine();
                                 Console.Write("Enter Card Number: ");
+                                cardno = Console.ReadLine();
                                 Console.WriteLine("Reservation Paid Successfully!");
                                 r.Status = "Confirmed";
-                                return;
+                                break;
                             case 2:
                                 return;
                         }
@@ -221,7 +225,9 @@ namespace SE_Assignment
                     return;
                 case 2:
                     Console.Write("Enter Type of Card: ");
+                    cardtype = Console.ReadLine();
                     Console.Write("Enter Card Number: ");
+                    cardno = Console.ReadLine();
                     Console.WriteLine("Reservation Paid Successfully!");
                     r.Status = "Confirmed";
                     return;

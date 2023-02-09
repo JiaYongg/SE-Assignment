@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
@@ -14,7 +15,7 @@ namespace SE_Assignment
             // Initialization of Objects
 
             Guest guest1 = new Guest("Sam", "1", "93836739", "sam56@outlook.com", "S9584736A", 200.50);
-            Guest guest2 = new Guest("Nat", "2", "83759257", "nat24@gmail.com", "S8347483N", 145.20);
+            Guest guest2 = new Guest("Nat", "2", "83759257", "nat24@gmail.com", "S8347483N", 745.20);
             Guest guest3 = new Guest("Kim", "3", "84563445", "kim62@hotmail.com", "S9182745E", 50.60);
             Guest guest4 = new Guest("Lay", "4", "94785965", "lay@connect.np.edu.sg", "T0104957Z", 70.20);
             Guest guest5 = new Guest("Ken", "5", "93857365", "ken51@gmail.com", "S9858373G", 66.50);
@@ -631,16 +632,51 @@ namespace SE_Assignment
                                                 while (inMakePayment)
                                                 {
                                                     Console.WriteLine("------------Submitted Reservations------------");
+                                                    Console.WriteLine("{0,-5} {1,-15} {2,-15} {3,-5:#.00}", "ID", "Check-In Date", "Check-Out Date", "Cost");
+                                                    int payable = 0;
                                                     foreach (Reservation r in g.ReservationList)
                                                     {
                                                         if (r.Status == "Submitted")
                                                         {
-                                                            Console.WriteLine("{0,5} {1,10} {2,10} ${3,-5:#.00}", r.CheckInDate, r.CheckOutDate, r.ReservationCost);
+                                                            Console.WriteLine("{0,-5} {1,-15} {2,-15} ${3,-5:#.00}",r.ReservationId, r.CheckInDate.ToString("dd/MM/yyyy"), r.CheckOutDate.ToString("dd/MM/yyyy"), r.ReservationCost);
+                                                            payable++;
                                                         }
                                                     }
-                                                    Console.WriteLine("Enter ID: ");
-                                                    int rsid = Convert.ToInt32(Console.ReadLine());
-                                                    g.makePayment(g.ReservationList[rsid]);
+                                                    Console.WriteLine("------------Menu------------");
+                                                    Console.WriteLine("1) Make Payment");
+                                                    Console.WriteLine("0) Exit");
+                                                    Console.WriteLine();
+                                                    Console.Write("Enter choice: ");
+                                                    input = Convert.ToInt32(Console.ReadLine());
+                                                    switch (input)
+                                                    {
+                                                        case 1:
+                                                            if (payable == 0)
+                                                            {
+                                                                Console.WriteLine("No Reservations needs payment.");
+                                                                continue;
+                                                            }
+                                                            else
+                                                            {
+                                                                Console.Write("Enter ID: ");
+                                                                string rsid = Console.ReadLine();
+                                                                foreach (Reservation r in g.ReservationList)
+                                                                {
+                                                                    if (r.ReservationId == rsid)
+                                                                    {
+                                                                        g.makePayment(r);
+                                                                        break;
+                                                                    }
+                                                                }
+                                                            }
+                                                            continue;
+                                                        case 0:
+                                                            inMakePayment = false;
+                                                            continue;
+                                                        default:
+                                                            Console.WriteLine("Invalid Option!");
+                                                            continue;
+                                                    }
                                                 }
                                                 continue;
                                             // Exit
