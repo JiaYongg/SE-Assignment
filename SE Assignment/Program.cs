@@ -172,9 +172,10 @@ namespace SE_Assignment
                                                 input = Convert.ToInt32(Console.ReadLine());
                                                 // choosing the options
                                                 switch (input)
-                                                {
-                                                    // Yes
+                                                {                                                   
+                                                    // Yes for search
                                                     case 1:
+                                                        displayAllRooms(hotelList);
                                                         Console.WriteLine("\nChoose search by:"); // guest’s budget, hotel type, review score, location and facilities
                                                         Console.WriteLine("1) Budget");
                                                         Console.WriteLine("2) Hotel Type");
@@ -362,83 +363,109 @@ namespace SE_Assignment
                                                         continue;
                                                     // No
                                                     case 2:
-                                                        Console.WriteLine("{0,-30} {1,-10} {2,-20} ${3,-5} {4,-16} {5,-15} {6,-10}", "Bed Type", "Max Guest", "Breakfast Served", "Cost Per Night", "Hotel Type", "Location", "Facilities");
-                                                        HotelIterator hotelIterator = new HotelIterator(hotelList);
-                                                        while (hotelIterator.hasNext())
-                                                        {
-                                                            StringBuilder sb = new StringBuilder();
-                                                            Hotel hotel = (Hotel)hotelIterator.next();
-                                                            for (int i = 0; i < hotel.FacilityList.Count; i++)
-                                                            {
-                                                                if (i == hotel.FacilityList.Count - 1)
-                                                                {
-                                                                    sb.Append(hotel.FacilityList[i]);
-                                                                }
-                                                                else
-                                                                {
-                                                                    sb.Append(hotel.FacilityList[i] + ", ");
-                                                                }
-                                                            }
-                                                            foreach (RoomType rt in hotel.RoomTypeList)
-                                                            {
-                                                                Console.WriteLine("{0,-30} {1,-10} {2,-20} ${3,-10:#.00} {4,-20} {5,-15} {6,-10}", rt.BedType, rt.MaxGuest, rt.BreakfastServed, rt.CostPerNight, hotel.Category, hotel.Location, sb);
-                                                            }
-                                                        }
+                                                        displayAllRooms(hotelList);
                                                         continue;
                                                 }
                                                 continue;
                                             // Reserve Hotel Room
                                             case 2:
-                                                Console.WriteLine("------------Make Reservation------------");
-                                                Console.Write("Enter Check-In Date: ");
-                                                DateTime ci = Convert.ToDateTime(Console.ReadLine());
-                                                Console.Write("Enter Check-Out Date: ");
-                                                DateTime co = Convert.ToDateTime(Console.ReadLine());
-                                                List<RoomType> availRooms = new List<RoomType>(mainRTList);
-
-                                                foreach (RoomTypeReservation rtr in rtrList)
+                                                DateTime ci, co;
+                                                bool noNewReservation = true;
+                                                while (noNewReservation)
                                                 {
-                                                    // Check if dates is not before checkout but after checkin
-                                                    if (co >= rtr.Reservation.CheckInDate && co <= rtr.Reservation.CheckOutDate && (rtr.Reservation.Status == "Submitted" || rtr.Reservation.Status == "Confirmed"))
+                                                    while (true)
                                                     {
-                                                        availRooms.Remove(rtr.RoomType);
+                                                        Console.WriteLine("------------Make Reservation------------");
+                                                        Console.Write("Enter Check-In Date: ");
+                                                        ci = Convert.ToDateTime(Console.ReadLine());
+                                                        Console.Write("Enter Check-Out Date: ");
+                                                        co = Convert.ToDateTime(Console.ReadLine());
+                                                        // co cant be same day or before ci
+                                                        if (co <= ci)
+                                                        {
+                                                            Console.WriteLine("Check out date must be 1 or more days infront of check in date!");
+                                                        }
+                                                        else
+                                                        {
+                                                            break;
+                                                        }
+                                                    }
 
-                                                        continue;
-                                                    }
-                                                    // Check if dates before checkout but after checkin
-                                                    else if (ci > rtr.Reservation.CheckInDate && ci < rtr.Reservation.CheckOutDate && (rtr.Reservation.Status == "Submitted" || rtr.Reservation.Status == "Confirmed"))
+
+                                                    List<RoomType> availRooms = new List<RoomType>(mainRTList);
+
+                                                    foreach (RoomTypeReservation rtr in rtrList)
                                                     {
-                                                        availRooms.Remove(rtr.RoomType);
-                                                        continue;
+                                                        // Check if dates is not before checkout but after checkin
+                                                        if (co >= rtr.Reservation.CheckInDate && co <= rtr.Reservation.CheckOutDate && (rtr.Reservation.Status == "Submitted" || rtr.Reservation.Status == "Confirmed"))
+                                                        {
+                                                            availRooms.Remove(rtr.RoomType);
+
+                                                            continue;
+                                                        }
+                                                        // Check if dates before checkout but after checkin
+                                                        else if (ci > rtr.Reservation.CheckInDate && ci < rtr.Reservation.CheckOutDate && (rtr.Reservation.Status == "Submitted" || rtr.Reservation.Status == "Confirmed"))
+                                                        {
+                                                            availRooms.Remove(rtr.RoomType);
+                                                            continue;
+                                                        }
+                                                        // check if dates inside checkout and checkin
+                                                        else if (ci >= rtr.Reservation.CheckInDate && co <= rtr.Reservation.CheckOutDate && (rtr.Reservation.Status == "Submitted" || rtr.Reservation.Status == "Confirmed"))
+                                                        {
+                                                            availRooms.Remove(rtr.RoomType);
+                                                            continue;
+                                                        }
+                                                        else
+                                                        {
+                                                            continue;
+                                                        }
                                                     }
-                                                    // check if dates inside checkout and checkin
-                                                    else if (ci >= rtr.Reservation.CheckInDate && co <= rtr.Reservation.CheckOutDate && (rtr.Reservation.Status == "Submitted" || rtr.Reservation.Status == "Confirmed"))
+                                                    Console.WriteLine("------------Availble Rooms------------");
+                                                    Console.WriteLine("{0,5} {1,-30} {2,-15} {3,-15} {4,-15:#.00} {5,-15:#.00}", "Room ID", "Bed Type", "Breakfast Served", "Max Guests", "Cost Per Night", "Subtotal Cost");
+                                                    foreach (RoomType rt in availRooms)
                                                     {
-                                                        availRooms.Remove(rtr.RoomType);
-                                                        continue;
+                                                        Console.WriteLine("{0,5} {1,-30} {2,-15} {3,-15} ${4,-15:#.00} ${5,-15:#.00}", rt.RoomId, rt.BedType, rt.BreakfastServed, rt.MaxGuest, rt.CostPerNight, rt.CostPerNight * ((co - ci).Days));
                                                     }
-                                                    else
+
+                                                    int rtId;
+
+                                                    while (true)
                                                     {
-                                                        continue;
+                                                        Console.Write("\nEnter room to reserve: ");
+                                                        rtId = Convert.ToInt32(Console.ReadLine());
+                                                        if (rtId > availRooms.Count())
+                                                        {
+                                                            Console.WriteLine("Invalid room selected");
+                                                        }
+                                                        else
+                                                        {
+                                                            break;
+                                                        }
+                                                    }
+
+
+
+                                                    int reservationId = reservationList.Count + 1;
+                                                    double newSubTotal = mainRTList[rtId - 1].CostPerNight * ((co - ci).Days);
+                                                    Reservation newReservation = new Reservation(reservationId.ToString(), ci, co, newSubTotal, "Submitted");
+                                                    reservationList.Add(newReservation);
+                                                    g.ReservationList.Add(newReservation);
+
+                                                    RoomTypeReservation newRtr = new RoomTypeReservation(newReservation, mainRTList[rtId]);
+                                                    Console.WriteLine("Thank you for reserving a room with us.");
+
+
+                                                    Console.WriteLine("\nWould you want to reserve another room?");
+                                                    Console.WriteLine("1) Yes");
+                                                    Console.WriteLine("2) No");
+
+                                                    Console.Write("Enter choice: ");
+                                                    input = Convert.ToInt32(Console.ReadLine());
+                                                    if (input == 2)
+                                                    {
+                                                        noNewReservation = false;
                                                     }
                                                 }
-                                                Console.WriteLine("------------Availble Rooms------------");
-                                                Console.WriteLine("{0,5} {1,-30} {2,-15} {3,-15} {4,-15:#.00} {5,-15:#.00}","Room ID", "Bed Type", "Breakfast Served", "Max Guests", "Cost Per Night", "Subtotal Cost");
-                                                foreach (RoomType rt in availRooms)
-                                                {
-                                                    Console.WriteLine("{0,5} {1,-30} {2,-15} {3,-15} ${4,-15:#.00} ${5,-15:#.00}", rt.RoomId ,rt.BedType, rt.BreakfastServed, rt.MaxGuest, rt.CostPerNight, rt.CostPerNight * ((co-ci).Days));
-                                                }
-                                                Console.Write("Enter room to reserve: ");
-                                                int rtId = Convert.ToInt32(Console.ReadLine());
-                                                int reservationId = reservationList.Count + 1;
-                                                double newSubTotal = mainRTList[rtId].CostPerNight * ((co - ci).Days);
-                                                Reservation newReservation = new Reservation(reservationId.ToString(), ci, co, newSubTotal, "Submitted");
-                                                reservationList.Add(newReservation);
-                                                g.ReservationList.Add(newReservation);
-                                                
-                                                RoomTypeReservation newRtr = new RoomTypeReservation(newReservation, mainRTList[rtId]);
-                                                Console.WriteLine("Thank you for reserving a room with us.");
-
                                                 continue;
                                             // View Reservation History
                                             case 3:
@@ -779,6 +806,30 @@ namespace SE_Assignment
 
             return true;
         }
-
+        public static void displayAllRooms(HotelList hotelList)
+        {
+            Console.WriteLine("{0,-30} {1,-10} {2,-20} ${3,-5} {4,-16} {5,-15} {6,-10}", "Bed Type", "Max Guest", "Breakfast Served", "Cost Per Night", "Hotel Type", "Location", "Facilities");
+            HotelIterator hotelIterator = new HotelIterator(hotelList);
+            while (hotelIterator.hasNext())
+            {
+                StringBuilder sb = new StringBuilder();
+                Hotel hotel = (Hotel)hotelIterator.next();
+                for (int i = 0; i < hotel.FacilityList.Count; i++)
+                {
+                    if (i == hotel.FacilityList.Count - 1)
+                    {
+                        sb.Append(hotel.FacilityList[i]);
+                    }
+                    else
+                    {
+                        sb.Append(hotel.FacilityList[i] + ", ");
+                    }
+                }
+                foreach (RoomType rt in hotel.RoomTypeList)
+                {
+                    Console.WriteLine("{0,-30} {1,-10} {2,-20} ${3,-10:#.00} {4,-20} {5,-15} {6,-10}", rt.BedType, rt.MaxGuest, rt.BreakfastServed, rt.CostPerNight, hotel.Category, hotel.Location, sb);
+                }
+            }
+        }
     }
 }
