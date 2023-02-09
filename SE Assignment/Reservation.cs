@@ -44,7 +44,7 @@ namespace SE_Assignment
             set { status = value; }
         }
 
-        public Reservation(string id, DateTime checkIn, DateTime checkout, int costs, string status)
+        public Reservation(string id, DateTime checkIn, DateTime checkout, double costs, string status)
         {
             ReservationId = id;
             CheckInDate = checkIn;
