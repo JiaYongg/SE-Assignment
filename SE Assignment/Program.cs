@@ -81,8 +81,6 @@ namespace SE_Assignment
             RoomTypeReservation rtr5 = new RoomTypeReservation(reservation5, roomType5);
             List<RoomTypeReservation> rtrList = new List<RoomTypeReservation> { rtr1, rtr2, rtr3, rtr4, rtr5 };
 
-            List<RoomTypeReservation> rtrList = new List<RoomTypeReservation> { rtr1, rtr2, rtr3, rtr4, rtr5 };
-
             Hotel luxuryHotel = new Hotel("Luxurious Palace", "21 Orchard Rd", "Luxury", 5, true, facilities1, roomTypeList1);
             Hotel themedHotel = new Hotel("SkyHigh Hotel", "Bugis St 99", "Themed", 3, true, facilities2, roomTypeList2);
             Hotel cityHotel = new Hotel("Central City Hotel", "184 Newton Rd", "City", 2, true, facilities3, roomTypeList3);
@@ -144,6 +142,7 @@ namespace SE_Assignment
                                         Console.WriteLine("3) View Reservation History");
                                         Console.WriteLine("4) View Profile");
                                         Console.WriteLine("5) View Balance");
+                                        Console.WriteLine("6) Make Payment");
                                         Console.WriteLine("0) Exit");
                                         Console.WriteLine();
 
@@ -571,6 +570,24 @@ namespace SE_Assignment
                                                             inAccBal = false;
                                                             break;
                                                     }
+                                                }
+                                                continue;
+                                            // Make Payment
+                                            case 6:
+                                                bool inMakePayment = true;
+                                                while (inMakePayment)
+                                                {
+                                                    Console.WriteLine("------------Submitted Reservations------------");
+                                                    foreach (Reservation r in g.ReservationList)
+                                                    {
+                                                        if (r.Status == "Submitted")
+                                                        {
+                                                            Console.WriteLine("{0,5} {1,10} {2,10} ${3,-5:#.00}", r.CheckInDate, r.CheckOutDate, r.ReservationCost);
+                                                        }
+                                                    }
+                                                    Console.WriteLine("Enter ID: ");
+                                                    int rsid = Convert.ToInt32(Console.ReadLine());
+                                                    g.makePayment(g.ReservationList[rsid]);
                                                 }
                                                 continue;
                                             // Exit
