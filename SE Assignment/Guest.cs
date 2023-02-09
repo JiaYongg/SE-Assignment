@@ -260,6 +260,7 @@ namespace SE_Assignment
         {
             if (reservationList.Count != 0)
             {
+                Console.WriteLine("{0,-15} {1,-15} {2,-15} {3,-10}", "Check-In Date", "Check-Out Date", "Status", "Cost");
                 foreach (Reservation re in reservationList)
                 {
                     Console.WriteLine("{0,-15} {1,-15} {2,-15} ${3,-10:#.00}", re.CheckInDate.ToString("dd/MM/yyyy"), re.CheckOutDate.ToString("dd/MM/yyyy"), re.Status, re.ReservationCost);
@@ -285,6 +286,10 @@ namespace SE_Assignment
                     if ((re.CheckInDate - DateTime.Now).TotalDays >= 2)
                     {
                         editable++;
+                        if (editable == 1)
+                        {
+                            Console.WriteLine("{0,-5} {1,-15} {2,-15} {3,-15} ${4,-10}", "ID", "Check-In Date", "Check-Out Date", "Status", "Cost");
+                        }
                         Console.WriteLine("{0,-5} {1,-15} {2,-15} {3,-15} ${4,-10:#.00}", re.ReservationId, re.CheckInDate.ToString("dd/MM/yyyy"), re.CheckOutDate.ToString("dd/MM/yyyy"), re.Status, re.ReservationCost);
                     }
                 }

@@ -451,7 +451,6 @@ namespace SE_Assignment
                                                     Console.WriteLine("------------Reservation History------------");
                                                     if (g.displayAllReservations() != false)
                                                     {
-                                                        Console.WriteLine("{0,-15} {1,-15} {2,-15} {3,-10}", "Check-In Date", "Check-Out Date", "Status", "Cost");
                                                         Console.WriteLine("------------Menu------------");
                                                         Console.WriteLine("1) Manage Reservations");
                                                         Console.WriteLine("2) Rate Hotels");
@@ -474,7 +473,6 @@ namespace SE_Assignment
                                                                     Console.WriteLine("------------Manage Reservations------------");
                                                                     if (g.displayEditableReservations() != false)
                                                                     {
-                                                                        Console.WriteLine("{0,-5} {1,-15} {2,-15} {3,-15} ${4,-10}", "ID", "Check-In Date", "Check-Out Date", "Status", "Cost");
                                                                         Console.WriteLine("------------Menu------------");
                                                                         Console.WriteLine("1) Select Reservation To Edit");
                                                                         Console.WriteLine("2) Select Reservation To Cancel");
@@ -511,7 +509,7 @@ namespace SE_Assignment
                                                                                             {
                                                                                                 if (!((newCIDate.Day - DateTime.Now.Day) >= 2))
                                                                                                 {
-                                                                                                    Console.WriteLine("Cancellation failed! Cancellation must not be 2 days before the check in date.");
+                                                                                                    Console.WriteLine("Edit failed! Check in date must be 2 days after today.");
                                                                                                 }
                                                                                                 else if ((newCODate.Day - newCIDate.Day) < 0)
                                                                                                 {
@@ -521,7 +519,10 @@ namespace SE_Assignment
                                                                                                 {
                                                                                                     Console.WriteLine("Days between Check-In Date and Check-Out Date has to be more than 1!");
                                                                                                 }
-                                                                                                g.editReservation(editID, newCIDate, newCODate);
+                                                                                                else
+                                                                                                {
+                                                                                                    g.editReservation(editID, newCIDate, newCODate);
+                                                                                                }
                                                                                             }
                                                                                             else
                                                                                             {
