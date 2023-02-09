@@ -20,6 +20,8 @@ namespace SE_Assignment
             Guest guest4 = new Guest("Lay", "4", "94785965", "lay@connect.np.edu.sg", "T0104957Z", 70.20);
             Guest guest5 = new Guest("Ken", "5", "93857365", "ken51@gmail.com", "S9858373G", 66.50);
             Guest guest6 = new Guest("Haz", "6", "81957484", "haz9485@outlook.com", "T0204857J", 10);
+            Guest guest7 = new Guest("Lin", "7", "87651234", "lin8765@outlook.com", "S9901234H", 22.20); // 1 old reservation
+
 
             Vouchers voucher1 = new Vouchers("1", 5, new DateTime(2024, 1, 5));
             Vouchers voucher2 = new Vouchers("2", 5, new DateTime(2025, 2, 1));
@@ -44,7 +46,7 @@ namespace SE_Assignment
             List<Reservation> reservationList = new List<Reservation> {reservation1, reservation2, reservation3, reservation4, reservation5,
                                                                        reservation6, reservation7, reservation8, reservation9,reservation10};
 
-            List<Guest> guestList = new List<Guest> { guest1, guest2, guest3, guest4, guest5, guest6 };
+            List<Guest> guestList = new List<Guest> { guest1, guest2, guest3, guest4, guest5, guest6, guest7};
 
             guest1.addReservation(reservation1);
             guest2.addReservation(reservation2);
@@ -58,6 +60,7 @@ namespace SE_Assignment
             guest4.addReservation(reservation10);
             guest1.addReservation(reservation11);
             guest1.addReservation(reservation12);
+            guest7.addReservation(reservation10);
 
             List<string> facilities1 = new List<string> { "Gym", "Swimming Pool", "Lounge", "Sauna", "Casino" };
             List<string> facilities2 = new List<string> { "Swimming Pool", "Lounge", "Sauna", "Casino" };
@@ -422,7 +425,7 @@ namespace SE_Assignment
                                                         continue;
                                                     }
                                                 }
-                                                Console.WriteLine("------------Availble Rooms------------");
+                                                Console.WriteLine("------------Available Rooms------------");
                                                 Console.WriteLine("{0,5} {1,-30} {2,-15} {3,-15} {4,-15:#.00} {5,-15:#.00}","Room ID", "Bed Type", "Breakfast Served", "Max Guests", "Cost Per Night", "Subtotal Cost");
                                                 foreach (RoomType rt in availRooms)
                                                 {
@@ -446,156 +449,170 @@ namespace SE_Assignment
                                                 while (inReservationHistory)
                                                 {
                                                     Console.WriteLine("------------Reservation History------------");
-                                                    g.displayAllReservations();
-
-                                                    Console.WriteLine("------------Menu------------");
-                                                    Console.WriteLine("1) Manage Reservations");
-                                                    Console.WriteLine("2) Rate Hotels");
-                                                    Console.WriteLine("0) Exit");
-                                                    Console.WriteLine();
-
-                                                    Console.Write("Enter choice: ");
-                                                    input = Convert.ToInt32(Console.ReadLine());
-                                                    switch (input)
+                                                    if (g.displayAllReservations() != false)
                                                     {
-                                                        // Exit
-                                                        case 0:
-                                                            inReservationHistory = false;
-                                                            continue;
-                                                        // Manage Reservation
-                                                        case 1:
-                                                            bool inManageReservations = true;
-                                                            while (inManageReservations)
-                                                            {
-                                                                Console.WriteLine("------------Manage Reservations------------");
-                                                                g.displayEditableReservations();
+                                                        Console.WriteLine("{0,-15} {1,-15} {2,-15} {3,-10}", "Check-In Date", "Check-Out Date", "Status", "Cost");
+                                                        Console.WriteLine("------------Menu------------");
+                                                        Console.WriteLine("1) Manage Reservations");
+                                                        Console.WriteLine("2) Rate Hotels");
+                                                        Console.WriteLine("0) Exit");
+                                                        Console.WriteLine();
 
-                                                                Console.WriteLine("------------Menu------------");
-                                                                Console.WriteLine("1) Select Reservation To Edit");
-                                                                Console.WriteLine("2) Select Reservation To Cancel");
-                                                                Console.WriteLine("0) Exit");
-                                                                Console.WriteLine();
-
-                                                                Console.Write("Enter choice: ");
-                                                                input = Convert.ToInt32(Console.ReadLine());
-                                                                switch (input)
+                                                        Console.Write("Enter choice: ");
+                                                        input = Convert.ToInt32(Console.ReadLine());
+                                                        switch (input)
+                                                        {
+                                                            // Exit
+                                                            case 0:
+                                                                inReservationHistory = false;
+                                                                continue;
+                                                            // Manage Reservation
+                                                            case 1:
+                                                                bool inManageReservations = true;
+                                                                while (inManageReservations)
                                                                 {
-                                                                    case 0:
-                                                                        inManageReservations = false;
-                                                                        continue;
-                                                                    case 1:
-                                                                        Console.Write("Enter ID: ");
-                                                                        string editID = Console.ReadLine();
-                                                                        DateTime newCIDate = DateTime.Now;
-                                                                        DateTime newCODate = DateTime.Now;
+                                                                    Console.WriteLine("------------Manage Reservations------------");
+                                                                    if (g.displayEditableReservations() != false)
+                                                                    {
+                                                                        Console.WriteLine("{0,-5} {1,-15} {2,-15} {3,-15} ${4,-10}", "ID", "Check-In Date", "Check-Out Date", "Status", "Cost");
+                                                                        Console.WriteLine("------------Menu------------");
+                                                                        Console.WriteLine("1) Select Reservation To Edit");
+                                                                        Console.WriteLine("2) Select Reservation To Cancel");
+                                                                        Console.WriteLine("0) Exit");
+                                                                        Console.WriteLine();
 
-                                                                        while (!((newCIDate.Day - DateTime.Now.Day) >= 2) || !((newCODate.Day - newCIDate.Day) > 0))
+                                                                        Console.Write("Enter choice: ");
+                                                                        input = Convert.ToInt32(Console.ReadLine());
+                                                                        switch (input)
                                                                         {
-                                                                            Console.Write("Enter New Check-In Date: ");
-                                                                            newCIDate = Convert.ToDateTime(Console.ReadLine());
-                                                                            Console.Write("Enter New Check-Out Date: ");
-                                                                            newCODate = Convert.ToDateTime(Console.ReadLine());
+                                                                            case 0:
+                                                                                inManageReservations = false;
+                                                                                continue;
+                                                                            case 1:
+                                                                                Console.Write("Enter ID: ");
+                                                                                string editID = Console.ReadLine();
+                                                                                DateTime newCIDate = DateTime.Now;
+                                                                                DateTime newCODate = DateTime.Now;
 
-                                                                            foreach (RoomTypeReservation rtr in rtrList)
-                                                                            {
-                                                                                if (rtr.Reservation.ReservationId == editID)
+                                                                                while (!((newCIDate.Day - DateTime.Now.Day) >= 2) || !((newCODate.Day - newCIDate.Day) > 0))
                                                                                 {
-                                                                                    bool avail = isRoomAvail(reservationList, rtrList, rtr.RoomType, newCIDate, newCODate);
+                                                                                    Console.Write("Enter New Check-In Date: ");
+                                                                                    newCIDate = Convert.ToDateTime(Console.ReadLine());
+                                                                                    Console.Write("Enter New Check-Out Date: ");
+                                                                                    newCODate = Convert.ToDateTime(Console.ReadLine());
 
-                                                                                    if (avail)
+                                                                                    foreach (RoomTypeReservation rtr in rtrList)
                                                                                     {
-                                                                                        if (!((newCIDate.Day - DateTime.Now.Day) >= 2))
+                                                                                        if (rtr.Reservation.ReservationId == editID)
                                                                                         {
-                                                                                            Console.WriteLine("Cancellation failed! Cancellation must not be 2 days before the check in date.");
+                                                                                            bool avail = isRoomAvail(reservationList, rtrList, rtr.RoomType, newCIDate, newCODate);
+
+                                                                                            if (avail)
+                                                                                            {
+                                                                                                if (!((newCIDate.Day - DateTime.Now.Day) >= 2))
+                                                                                                {
+                                                                                                    Console.WriteLine("Cancellation failed! Cancellation must not be 2 days before the check in date.");
+                                                                                                }
+                                                                                                else if ((newCODate.Day - newCIDate.Day) < 0)
+                                                                                                {
+                                                                                                    Console.WriteLine("Check-Out Date cannot be same or earlier than Check-In Date!");
+                                                                                                }
+                                                                                                else if (!((newCODate.Day - newCIDate.Day) > 0))
+                                                                                                {
+                                                                                                    Console.WriteLine("Days between Check-In Date and Check-Out Date has to be more than 1!");
+                                                                                                }
+                                                                                                g.editReservation(editID, newCIDate, newCODate);
+                                                                                            }
+                                                                                            else
+                                                                                            {
+                                                                                                Console.WriteLine("Room not available at this date, change to a new date");
+                                                                                            }
                                                                                         }
-                                                                                        else if ((newCODate.Day - newCIDate.Day) < 0)
-                                                                                        {
-                                                                                            Console.WriteLine("Check-Out Date cannot be same or earlier than Check-In Date!");
-                                                                                        }
-                                                                                        else if (!((newCODate.Day - newCIDate.Day) > 0))
-                                                                                        {
-                                                                                            Console.WriteLine("Days between Check-In Date and Check-Out Date has to be more than 1!");
-                                                                                        }
-                                                                                        g.editReservation(editID, newCIDate, newCODate);
-                                                                                    }
-                                                                                    else
-                                                                                    {
-                                                                                        Console.WriteLine("Room not available at this date, change to a new date");
                                                                                     }
                                                                                 }
-                                                                            }
-
-
-
-
-                                                                        }
-                                                                        continue;
-                                                                    case 2:
-                                                                        Console.Write("Enter ID: ");
-                                                                        string cancelID = Console.ReadLine();
-                                                                        g.cancelReservation(cancelID);
-                                                                        inManageReservations = false;
-                                                                        continue;
-                                                                    default:
-                                                                        Console.WriteLine("Invalid Option!");
-                                                                        return;
-                                                                }
-
-                                                            }
-                                                            continue;
-                                                        case 2:
-                                                            bool inRateHotels = true;
-                                                            while (inRateHotels)
-                                                            {
-                                                                Console.WriteLine("------------Rate Hotels------------");
-                                                                Console.WriteLine("{0,-5} {1,-20}", "ID", "Hotel Name");
-                                                                foreach (Hotel h in hotelList.HotelCollection)
-                                                                {
-                                                                    foreach (Reservation r in g.ReservationList)
-                                                                    {
-                                                                        foreach (RoomTypeReservation rtr in rtrList)
-                                                                        {
-                                                                            if (rtr.Reservation.ReservationId == r.ReservationId && r.Status == "Fulfilled")
-                                                                            {
-                                                                                foreach (RoomType rt in h.RoomTypeList)
+                                                                                continue;
+                                                                            case 2:
+                                                                                Console.Write("Enter ID: ");
+                                                                                string cancelID = Console.ReadLine();
+                                                                                if (g.cancelReservation(cancelID) == true)
                                                                                 {
-                                                                                    if (rt == rtr.RoomType)
+                                                                                    inManageReservations = false;
+                                                                                }
+
+                                                                                continue;
+                                                                            default:
+                                                                                Console.WriteLine("Invalid Option!");
+                                                                                return;
+                                                                        }
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        break;
+                                                                    }
+
+
+                                                                }
+                                                                continue;
+                                                            case 2:
+                                                                bool inRateHotels = true;
+                                                                while (inRateHotels)
+                                                                {
+                                                                    Console.WriteLine("------------Rate Hotels------------");
+                                                                    Console.WriteLine("{0,-5} {1,-20}", "ID", "Hotel Name");
+                                                                    foreach (Hotel h in hotelList.HotelCollection)
+                                                                    {
+                                                                        foreach (Reservation r in g.ReservationList)
+                                                                        {
+                                                                            foreach (RoomTypeReservation rtr in rtrList)
+                                                                            {
+                                                                                if (rtr.Reservation.ReservationId == r.ReservationId && r.Status == "Fulfilled")
+                                                                                {
+                                                                                    foreach (RoomType rt in h.RoomTypeList)
                                                                                     {
-                                                                                        Console.WriteLine("{0,-5} {1,-20}", h.HotelID, h.Name);
+                                                                                        if (rt == rtr.RoomType)
+                                                                                        {
+                                                                                            Console.WriteLine("{0,-5} {1,-20}", h.HotelID, h.Name);
+                                                                                        }
                                                                                     }
                                                                                 }
                                                                             }
                                                                         }
                                                                     }
-                                                                }
-                                                                Console.WriteLine("------------Menu------------");
-                                                                Console.WriteLine("1) Select Hotel to give Rating");
-                                                                Console.WriteLine("0) Exit");
-                                                                Console.WriteLine();
+                                                                    Console.WriteLine("------------Menu------------");
+                                                                    Console.WriteLine("1) Select Hotel to give Rating");
+                                                                    Console.WriteLine("0) Exit");
+                                                                    Console.WriteLine();
 
-                                                                Console.Write("Enter choice: ");
-                                                                input = Convert.ToInt32(Console.ReadLine());
-                                                                switch (input)
-                                                                {
-                                                                    case 0:
-                                                                        inManageReservations = false;
-                                                                        continue;
-                                                                    case 1:
-                                                                        Console.Write("Enter Hotel ID: ");
-                                                                        string hid = Console.ReadLine();
-                                                                        Console.Write("Enter Number of Stars: ");
-                                                                        double stars = Convert.ToDouble(Console.ReadLine());
-                                                                        Console.Write("Enter Comments: ");
-                                                                        string comment = Console.ReadLine();
-                                                                        g.rateHotel(hid, stars, comment, hrtList, hotelList.HotelCollection);
-                                                                        continue;
+                                                                    Console.Write("Enter choice: ");
+                                                                    input = Convert.ToInt32(Console.ReadLine());
+                                                                    switch (input)
+                                                                    {
+                                                                        case 0:
+                                                                            inManageReservations = false;
+                                                                            continue;
+                                                                        case 1:
+                                                                            Console.Write("Enter Hotel ID: ");
+                                                                            string hid = Console.ReadLine();
+                                                                            Console.Write("Enter Number of Stars: ");
+                                                                            double stars = Convert.ToDouble(Console.ReadLine());
+                                                                            Console.Write("Enter Comments: ");
+                                                                            string comment = Console.ReadLine();
+                                                                            g.rateHotel(hid, stars, comment, hrtList, hotelList.HotelCollection);
+                                                                            continue;
+                                                                    }
                                                                 }
-                                                            }
-                                                            continue;
-                                                        default:
-                                                            Console.WriteLine("Invalid Option!");
-                                                            return;
+                                                                continue;
+                                                            default:
+                                                                Console.WriteLine("Invalid Option!");
+                                                                return;
+                                                        }
                                                     }
+                                                    else
+                                                    {
+                                                        break;
+                                                    }
+
+                                                    
                                                 }
                                                 continue;
                                             // View Profile
