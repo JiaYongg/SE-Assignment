@@ -152,6 +152,7 @@ namespace SE_Assignment
                                         Console.WriteLine("3) View Reservation History");
                                         Console.WriteLine("4) View Profile");
                                         Console.WriteLine("5) View Balance");
+                                        Console.WriteLine("6) Make Payment");
                                         Console.WriteLine("0) Exit");
                                         Console.WriteLine();
 
@@ -634,6 +635,24 @@ namespace SE_Assignment
                                                             inAccBal = false;
                                                             break;
                                                     }
+                                                }
+                                                continue;
+                                            // Make Payment
+                                            case 6:
+                                                bool inMakePayment = true;
+                                                while (inMakePayment)
+                                                {
+                                                    Console.WriteLine("------------Submitted Reservations------------");
+                                                    foreach (Reservation r in g.ReservationList)
+                                                    {
+                                                        if (r.Status == "Submitted")
+                                                        {
+                                                            Console.WriteLine("{0,5} {1,10} {2,10} ${3,-5:#.00}", r.CheckInDate, r.CheckOutDate, r.ReservationCost);
+                                                        }
+                                                    }
+                                                    Console.WriteLine("Enter ID: ");
+                                                    int rsid = Convert.ToInt32(Console.ReadLine());
+                                                    g.makePayment(g.ReservationList[rsid]);
                                                 }
                                                 continue;
                                             // Exit

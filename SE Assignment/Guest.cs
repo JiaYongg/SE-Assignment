@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -182,18 +183,50 @@ namespace SE_Assignment
 
         public void makePayment(Reservation r)
         {
-
-            if (balance >= r.ReservationCost)
+            Console.WriteLine("------------Menu------------");
+            Console.WriteLine("1) Pay by Account Balance");
+            Console.WriteLine("2) Pay by Credit Card");
+            Console.WriteLine("0) Exit");
+            Console.WriteLine();
+            Console.Write("Enter choice: ");
+            int input = Convert.ToInt32(Console.ReadLine());
+            switch (input)
             {
-                balance -= r.ReservationCost;
-                Console.WriteLine("${0} has been deducted from your account balance. Your remaining balance is ${1}", Convert.ToString(r.ReservationCost), Convert.ToString(balance));
+                case 1:
+                    if (balance >= r.ReservationCost)
+                    {
+                        balance -= r.ReservationCost;
+                        r.Status = "Confirmed";
+                        Console.WriteLine("Reservation Paid Successfully!");
+                        Console.WriteLine("${0} has been deducted from your account balance. Your remaining balance is ${1}", Convert.ToString(r.ReservationCost), Convert.ToString(balance));
+                    }
+                    else if (balance < r.ReservationCost)
+                    {
+                        Console.WriteLine("Insufficient Funds, Would you like to pay the remaining with your credit card?");
+                        Console.WriteLine("1) Yes");
+                        Console.WriteLine("2) No");
+                        input = Convert.ToInt32(Console.ReadLine());
+                        switch (input)
+                        {
+                            case 1:
+                                Console.Write("Enter Type of Card: ");
+                                Console.Write("Enter Card Number: ");
+                                Console.WriteLine("Reservation Paid Successfully!");
+                                r.Status = "Confirmed";
+                                return;
+                            case 2:
+                                return;
+                        }
+                    }
+                    return;
+                case 2:
+                    Console.Write("Enter Type of Card: ");
+                    Console.Write("Enter Card Number: ");
+                    Console.WriteLine("Reservation Paid Successfully!");
+                    r.Status = "Confirmed";
+                    return;
             }
-            else if (balance < r.ReservationCost)
-            {
-                Console.WriteLine("Insufficient Funds, Topup your account balance or pay the remaining with your credit card.");
-                // implementation
-
-            }
+            
         }
 
         public void displayAllReservations()
