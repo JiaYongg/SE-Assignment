@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,18 +21,18 @@ namespace SE_Assignment
             Guest guest6 = new Guest("Haz", "6", "81957484", "haz9485@outlook.com", "T0204857J", 10);
 
             Reservation reservation1 = new Reservation("1", new DateTime(2023, 1, 1), new DateTime(2023, 1, 5), 250, "Fulfilled");
-            Reservation reservation2 = new Reservation("2", new DateTime(2023, 12, 12), new DateTime(2022, 12, 17), 500, "Submitted");
+            Reservation reservation2 = new Reservation("2", new DateTime(2023, 12, 12), new DateTime(2023, 12, 17), 500, "Submitted");  //Testable
             Reservation reservation3 = new Reservation("3", new DateTime(2023, 1, 7), new DateTime(2023, 1, 8), 120, "Fulfilled");
-            Reservation reservation4 = new Reservation("4", new DateTime(2023, 12, 30), new DateTime(2023, 1, 12), 700, "Confirmed");
-            Reservation reservation5 = new Reservation("5", new DateTime(2023, 11, 18), new DateTime(2022, 11, 20), 300, "Submitted");
+            Reservation reservation4 = new Reservation("4", new DateTime(2023, 12, 30), new DateTime(2024, 1, 12), 700, "Confirmed"); //Testable
+            Reservation reservation5 = new Reservation("5", new DateTime(2023, 11, 18), new DateTime(2023, 11, 20), 300, "Submitted"); //Testable
             Reservation reservation6 = new Reservation("6", new DateTime(2021, 1, 5), new DateTime(2021, 1, 10), 550, "No-Show");
             Reservation reservation7 = new Reservation("7", new DateTime(2021, 2, 8), new DateTime(2021, 2, 14), 600, "No-Show");
             Reservation reservation8 = new Reservation("8", new DateTime(2021, 3, 1), new DateTime(2021, 3, 2), 250, "Fulfilled");
             Reservation reservation9 = new Reservation("9", new DateTime(2021, 4, 22), new DateTime(2021, 4, 23), 200, "Fulfilled");
             Reservation reservation10 = new Reservation("10", new DateTime(2021, 5, 15), new DateTime(2021, 5, 20), 500, "Cancelled");
 
-            Reservation reservation11 = new Reservation("11", DateTime.Now, DateTime.Now.AddDays(2), 250, "Confirmed");
-            Reservation reservation12 = new Reservation("12", DateTime.Now.AddDays(10), DateTime.Now.AddDays(20), 250, "Confirmed");
+            Reservation reservation11 = new Reservation("11", DateTime.Now, DateTime.Now.AddDays(2), 250, "Confirmed"); 
+            Reservation reservation12 = new Reservation("12", DateTime.Now.AddDays(10), DateTime.Now.AddDays(20), 250, "Confirmed"); 
 
             List<Reservation> reservationList = new List<Reservation> {reservation1, reservation2, reservation3, reservation4, reservation5,
                                                                        reservation6, reservation7, reservation8, reservation9,reservation10};
@@ -57,16 +58,18 @@ namespace SE_Assignment
             List<string> facilities4 = new List<string> { "Gym", "Swimming Pool" };
             List<string> facilities5 = new List<string> { "Gym", "Swimming Pool", "Lounge", "Sauna" };
 
-            RoomType roomType1 = new RoomType("King-sized Bed", "Yes", 2, 470);
-            RoomType roomType2 = new RoomType("Queen-sized Bed", "No", 2, 420);
-            RoomType roomType3 = new RoomType("Single Bed", "Yes", 1, 140);
-            RoomType roomType4 = new RoomType("Double Bed", "Yes", 2, 220);
-            RoomType roomType5 = new RoomType("Single Bed", "No", 1, 580);
-            RoomType roomType6 = new RoomType("Double Bed", "Yes", 2, 450);
-            RoomType roomType7 = new RoomType("Double King-sized Bed", "Yes", 4, 840);
-            RoomType roomType8 = new RoomType("Double Queen-sized Bed", "No", 4, 480);
-            RoomType roomType9 = new RoomType("King-sized Bed", "No", 2, 540);
-            RoomType roomType10 = new RoomType("Queen-sized Bed", "Yes", 2, 320);
+            RoomType roomType1 = new RoomType("1", "King-sized Bed", "Yes", 2, 470);
+            RoomType roomType2 = new RoomType("2", "Queen-sized Bed", "No", 2, 420);
+            RoomType roomType3 = new RoomType("3", "Single Bed", "Yes", 1, 140);
+            RoomType roomType4 = new RoomType("4", "Double Bed", "Yes", 2, 220);
+            RoomType roomType5 = new RoomType("5", "Single Bed", "No", 1, 580);
+            RoomType roomType6 = new RoomType("6", "Double Bed", "Yes", 2, 450);
+            RoomType roomType7 = new RoomType("7", "Double King-sized Bed", "Yes", 4, 840);
+            RoomType roomType8 = new RoomType("8", "Double Queen-sized Bed", "No", 4, 480);
+            RoomType roomType9 = new RoomType("9", "King-sized Bed", "No", 2, 540);
+            RoomType roomType10 = new RoomType("10", "Queen-sized Bed", "Yes", 2, 320);
+
+            List<RoomType> mainRTList = new List<RoomType> { roomType1, roomType2, roomType3, roomType4, roomType5, roomType6, roomType7, roomType8, roomType9, roomType10 };
 
             List<RoomType> roomTypeList1 = new List<RoomType> { roomType1, roomType2 };
             List<RoomType> roomTypeList2 = new List<RoomType> { roomType3, roomType4 };
@@ -79,14 +82,13 @@ namespace SE_Assignment
             RoomTypeReservation rtr3 = new RoomTypeReservation(reservation3, roomType3);
             RoomTypeReservation rtr4 = new RoomTypeReservation(reservation4, roomType4);
             RoomTypeReservation rtr5 = new RoomTypeReservation(reservation5, roomType5);
-
             List<RoomTypeReservation> rtrList = new List<RoomTypeReservation> { rtr1, rtr2, rtr3, rtr4, rtr5 };
 
-            Hotel luxuryHotel = new Hotel("Luxurious Palace", "21 Orchard Rd", "Luxury", 5, true, facilities1, roomTypeList1);
-            Hotel themedHotel = new Hotel("SkyHigh Hotel", "Bugis St 99", "Themed", 3, true, facilities2, roomTypeList2);
-            Hotel cityHotel = new Hotel("Central City Hotel", "184 Newton Rd", "City", 2, true, facilities3, roomTypeList3);
-            Hotel budgetHotel = new Hotel("Budget101", "123 Toa Payoh Rd", "Budget", 4, true, facilities4, roomTypeList4);
-            Hotel ffHotel = new Hotel("FF Hotel", "Changi Rd", "Family-Friendly", 3, true, facilities5, roomTypeList5);
+            Hotel luxuryHotel = new Hotel("1", "Luxurious Palace", "21 Orchard Rd", "Luxury", 5, true, facilities1, roomTypeList1);
+            Hotel themedHotel = new Hotel("1", "SkyHigh Hotel", "Bugis St 99", "Themed", 3, true, facilities2, roomTypeList2);
+            Hotel cityHotel = new Hotel("1", "Central City Hotel", "184 Newton Rd", "City", 2, true, facilities3, roomTypeList3);
+            Hotel budgetHotel = new Hotel("1", "Budget101", "123 Toa Payoh Rd", "Budget", 4, true, facilities4, roomTypeList4);
+            Hotel ffHotel = new Hotel("1", "FF Hotel", "Changi Rd", "Family-Friendly", 3, true, facilities5, roomTypeList5);
 
             // Add all hotels to hotelcollection
             HotelList hotelList = new HotelList();
@@ -163,7 +165,7 @@ namespace SE_Assignment
                                                 switch (input)
                                                 {
                                                     // Yes
-                                                    case 1: 
+                                                    case 1:
                                                         Console.WriteLine("\nChoose search by:"); // guest’s budget, hotel type, review score, location and facilities
                                                         Console.WriteLine("1) Budget");
                                                         Console.WriteLine("2) Hotel Type");
@@ -343,16 +345,16 @@ namespace SE_Assignment
                                                                         {
                                                                             Console.WriteLine("{0,-30} {1,-10} {2,-20} ${3,-10:#.00} {4,-20} {5,-15} {6,-10}", rt.BedType, rt.MaxGuest, rt.BreakfastServed, rt.CostPerNight, hotel.Category, hotel.Location, sb);
                                                                         }
-                                                                        
+
                                                                     }
                                                                 }
-                                                                continue;                                                            
+                                                                continue;
                                                         }
                                                         continue;
                                                     // No
                                                     case 2:
-                                                        Console.WriteLine("{0,-30} {1,-10} {2,-20} ${3,-5} {4,-16} {5,-15} {6,-10}", "Bed Type", "MaxGuest", "Breakfast Served", "Cost Per Night", "Hotel Type", "Location", "Facilities");
-                                                        HotelIterator hotelIterator = new HotelIterator(hotelList);                                                        
+                                                        Console.WriteLine("{0,-30} {1,-10} {2,-20} ${3,-5} {4,-16} {5,-15} {6,-10}", "Bed Type", "Max Guest", "Breakfast Served", "Cost Per Night", "Hotel Type", "Location", "Facilities");
+                                                        HotelIterator hotelIterator = new HotelIterator(hotelList);
                                                         while (hotelIterator.hasNext())
                                                         {
                                                             StringBuilder sb = new StringBuilder();
@@ -367,7 +369,7 @@ namespace SE_Assignment
                                                                 {
                                                                     sb.Append(hotel.FacilityList[i] + ", ");
                                                                 }
-                                                            }                                                                
+                                                            }
                                                             foreach (RoomType rt in hotel.RoomTypeList)
                                                             {
                                                                 Console.WriteLine("{0,-30} {1,-10} {2,-20} ${3,-10:#.00} {4,-20} {5,-15} {6,-10}", rt.BedType, rt.MaxGuest, rt.BreakfastServed, rt.CostPerNight, hotel.Category, hotel.Location, sb);
@@ -378,6 +380,56 @@ namespace SE_Assignment
                                                 continue;
                                             // Reserve Hotel Room
                                             case 2:
+                                                Console.WriteLine("------------Make Reservation------------");
+                                                Console.Write("Enter Check-In Date: ");
+                                                DateTime ci = Convert.ToDateTime(Console.ReadLine());
+                                                Console.Write("Enter Check-Out Date: ");
+                                                DateTime co = Convert.ToDateTime(Console.ReadLine());
+                                                List<RoomType> availRooms = new List<RoomType>(mainRTList);
+
+                                                foreach (RoomTypeReservation rtr in rtrList)
+                                                {
+                                                    // Check if dates is not before checkout but after checkin
+                                                    if (co >= rtr.Reservation.CheckInDate && co <= rtr.Reservation.CheckOutDate && (rtr.Reservation.Status == "Submitted" || rtr.Reservation.Status == "Confirmed"))
+                                                    {
+                                                        availRooms.Remove(rtr.RoomType);
+
+                                                        continue;
+                                                    }
+                                                    // Check if dates before checkout but after checkin
+                                                    else if (ci > rtr.Reservation.CheckInDate && ci < rtr.Reservation.CheckOutDate && (rtr.Reservation.Status == "Submitted" || rtr.Reservation.Status == "Confirmed"))
+                                                    {
+                                                        availRooms.Remove(rtr.RoomType);
+                                                        continue;
+                                                    }
+                                                    // check if dates inside checkout and checkin
+                                                    else if (ci >= rtr.Reservation.CheckInDate && co <= rtr.Reservation.CheckOutDate && (rtr.Reservation.Status == "Submitted" || rtr.Reservation.Status == "Confirmed"))
+                                                    {
+                                                        availRooms.Remove(rtr.RoomType);
+                                                        continue;
+                                                    }
+                                                    else
+                                                    {
+                                                        continue;
+                                                    }
+                                                }
+                                                Console.WriteLine("------------Availble Rooms------------");
+                                                Console.WriteLine("{0,5} {1,-30} {2,-15} {3,-15} {4,-15:#.00} {5,-15:#.00}","Room ID", "Bed Type", "Breakfast Served", "Max Guests", "Cost Per Night", "Subtotal Cost");
+                                                foreach (RoomType rt in availRooms)
+                                                {
+                                                    Console.WriteLine("{0,5} {1,-30} {2,-15} {3,-15} ${4,-15:#.00} ${5,-15:#.00}", rt.RoomId ,rt.BedType, rt.BreakfastServed, rt.MaxGuest, rt.CostPerNight, rt.CostPerNight * ((co-ci).Days));
+                                                }
+                                                Console.Write("Enter room to reserve: ");
+                                                int rtId = Convert.ToInt32(Console.ReadLine());
+                                                int reservationId = reservationList.Count + 1;
+                                                double newSubTotal = mainRTList[rtId].CostPerNight * ((co - ci).Days);
+                                                Reservation newReservation = new Reservation(reservationId.ToString(), ci, co, newSubTotal, "Submitted");
+                                                reservationList.Add(newReservation);
+                                                g.ReservationList.Add(newReservation);
+                                                
+                                                RoomTypeReservation newRtr = new RoomTypeReservation(newReservation, mainRTList[rtId]);
+                                                Console.WriteLine("Thank you for reserving a room with us.");
+
                                                 continue;
                                             // View Reservation History
                                             case 3:
@@ -428,6 +480,17 @@ namespace SE_Assignment
                                                                         DateTime newCIDate = DateTime.Now;
                                                                         DateTime newCODate = DateTime.Now;
 
+                                                                        //Reservation reservation;
+                                                                        //foreach (Reservation r in reservationList)
+                                                                        //{
+                                                                        //    if (r.ReservationId == editID)
+                                                                        //    {
+                                                                        //        reservation = r;
+                                                                        //    }
+                                                                        //}
+
+                                                                        //reservation.isRoomAvail(reservationList, rtrList,)
+
                                                                         while (!((newCIDate.Day - DateTime.Now.Day) >= 2) || !((newCODate.Day - newCIDate.Day) > 0))
                                                                         {
                                                                             Console.Write("Enter New Check-In Date: ");
@@ -465,7 +528,7 @@ namespace SE_Assignment
                                                                 }
 
                                                             }
-                                                            continue;    
+                                                            continue;
                                                         case 2:
                                                             bool inRateHotels = true;
                                                             while (inRateHotels)
@@ -614,6 +677,34 @@ namespace SE_Assignment
                 }
             }
             return main_choice;
+        }
+
+        public bool isRoomAvail(List<Reservation> rList, List<RoomTypeReservation> rtrList, RoomType rt, DateTime checkIn, DateTime checkOut)
+        {
+
+            foreach (Reservation r in rList)
+            {
+                foreach (RoomTypeReservation rtr in rtrList)
+                {
+                    if (rtr.RoomType == rt)
+                    {
+                        if (!(checkIn > r.CheckOutDate))
+                        {
+                            return false;
+                        }
+                        else if (!(checkOut < r.CheckInDate))
+                        {
+                            return false;
+                        }
+                        else if (!(checkIn == r.CheckInDate))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            return true;
         }
 
     }
