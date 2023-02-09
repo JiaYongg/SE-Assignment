@@ -76,42 +76,63 @@ namespace SE_Assignment
             reservationList.Add(r);
         }
 
-        public void cancelReservation(string rid)
+        public bool cancelReservation(string rid) // CHANGED FROM VOID TO BOOL
         {
             foreach (Reservation re in reservationList)
             {
                 if (rid == re.ReservationId)
                 {
-                    Console.Write("Are you sure you want to cancel the booking: ");
+                    Console.WriteLine();
+                    Console.WriteLine("ID: ${0}", re.ReservationId);
+                    Console.WriteLine("Status: {0}", re.Status);
+                    Console.WriteLine("Refunding Amount: ${0:#.00}", re.ReservationCost);
+
+                    Console.Write("Are you sure you want to cancel the booking (yes/no): ");
                     string option = Console.ReadLine();
 
                     if (option == "yes")
                     {
-                        re.Status = "Cancelled";
-                        balance += re.ReservationCost;
-                        Console.WriteLine("Reservation has been successfully cancelled.");
-                        // need to check if theres voucher applied in the reservation
-                        Console.WriteLine("Your total balance is now {0:#.00}", balance);
-                        break;
+                        if (re.Status == "Submitted")
+                        {
+                            reservationList.Remove(re);
+                        }
+                        else
+                        {
+                            re.Status = "Cancelled";
+                            balance += re.ReservationCost;
+                            Console.WriteLine("Reservation has been successfully cancelled.");
+                            // need to check if theres voucher applied in the reservation
+                            Console.WriteLine("Your total balance is now ${0:#.00}", balance);
+                        }
+                        return true;
                     }
-                    break;
+                    else
+                        return false;
 
                 }
                 else
                 {
-                    continue;
+                    return false;
                 }
             }
+            return false;
         }
 
         public void editReservation(string rid, DateTime ciDate, DateTime coDate)
         {
+            double initialCost;
+
             foreach (Reservation re in reservationList)
             {
                 if (rid == re.ReservationId)
-                {
+                {   
+                    initialCost = re.ReservationCost;
+
+                    //if ()
+
                     re.CheckInDate = ciDate;
                     re.CheckOutDate = coDate;
+
                     Console.WriteLine("Reservation has been successfully editted.");
                     break;
                 }
@@ -235,18 +256,29 @@ namespace SE_Assignment
             
         }
 
-        public void displayAllReservations()
+        public bool displayAllReservations()
         {
-            Console.WriteLine("{0,-15} {1,-15} {2,-15} {3,-10}", "Check-In Date", "Check-Out Date", "Status", "Cost");
-            foreach (Reservation re in reservationList)
+            if (reservationList.Count != 0)
             {
-                Console.WriteLine("{0,-15} {1,-15} {2,-15} ${3,-10:#.00}", re.CheckInDate.ToString("dd/MM/yyyy"), re.CheckOutDate.ToString("dd/MM/yyyy"), re.Status, re.ReservationCost);
+                Console.WriteLine("{0,-15} {1,-15} {2,-15} {3,-10}", "Check-In Date", "Check-Out Date", "Status", "Cost");
+                foreach (Reservation re in reservationList)
+                {
+                    Console.WriteLine("{0,-15} {1,-15} {2,-15} ${3,-10:#.00}", re.CheckInDate.ToString("dd/MM/yyyy"), re.CheckOutDate.ToString("dd/MM/yyyy"), re.Status, re.ReservationCost);
+                }
+                return true;
             }
+            else
+            {
+                Console.WriteLine("No Reservation is found. Try making a reservation.");
+                return false;
+            }
+
+
         }
-        public void displayEditableReservations()
+        public bool displayEditableReservations()
         {
             int editable = 0;
-            Console.WriteLine("{0,-5} {1,-15} {2,-15} {3,-15} ${4,-10}", "ID", "Check-In Date", "Check-Out Date", "Status", "Cost");
+
             foreach (Reservation re in reservationList)
             {
                 if (re.Status == "Submitted" || re.Status == "Confirmed")
@@ -254,14 +286,25 @@ namespace SE_Assignment
                     if ((re.CheckInDate - DateTime.Now).TotalDays >= 2)
                     {
                         editable++;
+                        if (editable == 1)
+                        {
+                            Console.WriteLine("{0,-5} {1,-15} {2,-15} {3,-15} ${4,-10}", "ID", "Check-In Date", "Check-Out Date", "Status", "Cost");
+                        }
                         Console.WriteLine("{0,-5} {1,-15} {2,-15} {3,-15} ${4,-10:#.00}", re.ReservationId, re.CheckInDate.ToString("dd/MM/yyyy"), re.CheckOutDate.ToString("dd/MM/yyyy"), re.Status, re.ReservationCost);
                     }
                 }
             }
+
             if (editable == 0)
             {
-                Console.WriteLine("No Reservations can be editted.");
+                Console.WriteLine("No Reservations can be edited.");
+                return false;
             }
+
+            return true;
+
+
+
         }
 
     }
