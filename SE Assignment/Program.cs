@@ -550,7 +550,7 @@ namespace SE_Assignment
                                                                                                 }
                                                                                                 else
                                                                                                 {
-                                                                                                    g.editReservation(editID, newCIDate, newCODate);
+                                                                                                    g.editReservation(editID, newCIDate, newCODate, rtr.RoomType.CostPerNight);
                                                                                                 }
                                                                                             }
                                                                                             else

@@ -118,7 +118,7 @@ namespace SE_Assignment
             return false;
         }
 
-        public void editReservation(string rid, DateTime ciDate, DateTime coDate)
+        public void editReservation(string rid, DateTime ciDate, DateTime coDate, double newCost)
         {
             double initialCost;
 
@@ -127,8 +127,17 @@ namespace SE_Assignment
                 if (rid == re.ReservationId)
                 {   
                     initialCost = re.ReservationCost;
+                    double difference = newCost - initialCost
 
-                    //if ()
+                    if (difference > 0) 
+                    {
+                        makePayment(re);
+                    }
+                    else if (difference < 0) 
+                    {
+                        balance += newCost - initialCost;
+                    }
+
 
                     re.CheckInDate = ciDate;
                     re.CheckOutDate = coDate;
