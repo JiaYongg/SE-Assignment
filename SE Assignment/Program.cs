@@ -455,6 +455,8 @@ namespace SE_Assignment
                                                     g.ReservationList.Add(newReservation);
 
                                                     RoomTypeReservation newRtr = new RoomTypeReservation(newReservation, mainRTList[rtId]);
+                                                    rtrList.Add(newRtr); 
+
                                                     Console.WriteLine("Thank you for reserving a room with us.");
 
 
