@@ -694,16 +694,25 @@ namespace SE_Assignment
                                                 while (inMakePayment)
                                                 {
                                                     Console.WriteLine("------------Submitted Reservations------------");
-                                                    Console.WriteLine("{0,-5} {1,-15} {2,-15} {3,-5:#.00}", "ID", "Check-In Date", "Check-Out Date", "Cost");
                                                     int payable = 0;
                                                     foreach (Reservation r in g.ReservationList)
                                                     {
                                                         if (r.Status == "Submitted")
                                                         {
-                                                            Console.WriteLine("{0,-5} {1,-15} {2,-15} ${3,-5:#.00}",r.ReservationId, r.CheckInDate.ToString("dd/MM/yyyy"), r.CheckOutDate.ToString("dd/MM/yyyy"), r.ReservationCost);
                                                             payable++;
+                                                            if (payable == 1)
+                                                            {
+                                                                Console.WriteLine("{0,-5} {1,-15} {2,-15} {3,-5:#.00}", "ID", "Check-In Date", "Check-Out Date", "Cost");
+                                                            }
+                                                            Console.WriteLine("{0,-5} {1,-15} {2,-15} ${3,-5:#.00}",r.ReservationId, r.CheckInDate.ToString("dd/MM/yyyy"), r.CheckOutDate.ToString("dd/MM/yyyy"), r.ReservationCost);
+                                                            
                                                         }
                                                     }
+                                                    if (payable == 0)
+                                                    {
+                                                        Console.WriteLine("No Reservations needs payment");
+                                                    }
+
                                                     Console.WriteLine("------------Menu------------");
                                                     Console.WriteLine("1) Make Payment");
                                                     Console.WriteLine("0) Exit");
@@ -716,6 +725,7 @@ namespace SE_Assignment
                                                             if (payable == 0)
                                                             {
                                                                 Console.WriteLine("No Reservations needs payment.");
+                                                                Console.WriteLine();
                                                                 continue;
                                                             }
                                                             else
