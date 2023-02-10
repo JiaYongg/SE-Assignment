@@ -32,20 +32,19 @@ namespace SE_Assignment
 
             List<Vouchers> vList = new List<Vouchers> { voucher1, voucher2, voucher3, voucher4, voucher5 };
 
-            Reservation reservation1 = new Reservation("1", new DateTime(2023, 1, 1), new DateTime(2023, 1, 5), 250, "Fulfilled");
-            Reservation reservation2 = new Reservation("2", new DateTime(2023, 12, 12), new DateTime(2023, 12, 17), 500, "Submitted");  //Testable
-            Reservation reservation3 = new Reservation("3", new DateTime(2023, 1, 7), new DateTime(2023, 1, 8), 120, "Fulfilled");
-            Reservation reservation4 = new Reservation("4", new DateTime(2023, 12, 30), new DateTime(2024, 1, 12), 700, "Confirmed"); //Testable
-            Reservation reservation5 = new Reservation("5", new DateTime(2023, 11, 18), new DateTime(2023, 11, 20), 300, "Submitted"); //Testable
-            Reservation reservation6 = new Reservation("6", new DateTime(2021, 1, 5), new DateTime(2021, 1, 10), 550, "No-Show");
-            Reservation reservation7 = new Reservation("7", new DateTime(2021, 2, 8), new DateTime(2021, 2, 14), 600, "No-Show");
-            Reservation reservation8 = new Reservation("8", new DateTime(2021, 3, 1), new DateTime(2021, 3, 2), 250, "Fulfilled");
-            Reservation reservation9 = new Reservation("9", new DateTime(2021, 4, 22), new DateTime(2021, 4, 23), 200, "Fulfilled");
-            Reservation reservation10 = new Reservation("10", new DateTime(2021, 5, 15), new DateTime(2021, 5, 20), 500, "Cancelled");
+            Reservation reservation1 = new Reservation("1", new DateTime(2023, 1, 1), new DateTime(2023, 1, 5), 1880, "Fulfilled");
+            Reservation reservation2 = new Reservation("2", new DateTime(2023, 12, 12), new DateTime(2023, 12, 17), 2100, "Submitted");  //Testable
+            Reservation reservation3 = new Reservation("3", new DateTime(2023, 1, 7), new DateTime(2023, 1, 8), 140, "Fulfilled");
+            Reservation reservation4 = new Reservation("4", new DateTime(2023, 12, 30), new DateTime(2024, 1, 12), 2860, "Confirmed"); //Testable
+            Reservation reservation5 = new Reservation("5", new DateTime(2023, 11, 18), new DateTime(2023, 11, 20), 840, "Submitted"); //Testable
+            Reservation reservation6 = new Reservation("6", new DateTime(2021, 1, 5), new DateTime(2021, 1, 10), 2900, "No-Show");
+            Reservation reservation7 = new Reservation("7", new DateTime(2021, 2, 8), new DateTime(2021, 2, 14), 2700, "No-Show");
+            Reservation reservation8 = new Reservation("8", new DateTime(2021, 3, 1), new DateTime(2021, 3, 2), 840, "Fulfilled");
+            Reservation reservation9 = new Reservation("9", new DateTime(2021, 4, 22), new DateTime(2021, 4, 23), 480, "Fulfilled");
+            Reservation reservation10 = new Reservation("10", new DateTime(2021, 5, 15), new DateTime(2021, 5, 20), 2700, "Cancelled");
 
-            Reservation reservation11 = new Reservation("11", DateTime.Now, DateTime.Now.AddDays(2), 250, "Confirmed"); 
-            Reservation reservation12 = new Reservation("12", DateTime.Now.AddDays(10), DateTime.Now.AddDays(20), 250, "Confirmed"); 
-
+            Reservation reservation11 = new Reservation("11", DateTime.Now, DateTime.Now.AddDays(2), 640, "Confirmed");
+            Reservation reservation12 = new Reservation("12", DateTime.Now.AddDays(10), DateTime.Now.AddDays(20), 3200, "Confirmed");
             List<Reservation> reservationList = new List<Reservation> {reservation1, reservation2, reservation3, reservation4, reservation5,
                                                                        reservation6, reservation7, reservation8, reservation9,reservation10};
 
@@ -95,8 +94,15 @@ namespace SE_Assignment
             RoomTypeReservation rtr3 = new RoomTypeReservation(reservation3, roomType3);
             RoomTypeReservation rtr4 = new RoomTypeReservation(reservation4, roomType4);
             RoomTypeReservation rtr5 = new RoomTypeReservation(reservation5, roomType2);
+            RoomTypeReservation rtr6 = new RoomTypeReservation(reservation6, roomType5);
+            RoomTypeReservation rtr7 = new RoomTypeReservation(reservation7, roomType6);
+            RoomTypeReservation rtr8 = new RoomTypeReservation(reservation8, roomType7);
+            RoomTypeReservation rtr9 = new RoomTypeReservation(reservation9, roomType8);
+            RoomTypeReservation rtr10 = new RoomTypeReservation(reservation10, roomType9);
+            RoomTypeReservation rtr11 = new RoomTypeReservation(reservation11, roomType10);
+            RoomTypeReservation rtr12 = new RoomTypeReservation(reservation12, roomType10);
 
-            List<RoomTypeReservation> rtrList = new List<RoomTypeReservation> { rtr1, rtr2, rtr3, rtr4, rtr5 };
+            List<RoomTypeReservation> rtrList = new List<RoomTypeReservation> { rtr1, rtr2, rtr3, rtr4, rtr5, rtr6, rtr7, rtr8, rtr9, rtr10, rtr11, rtr12 };
 
             Hotel luxuryHotel = new Hotel("1", "Luxurious Palace", "21 Orchard Rd", "Luxury", 5, true, facilities1, roomTypeList1); // change to boolean value to test that voucher prompt not shown
             Hotel themedHotel = new Hotel("2", "SkyHigh Hotel", "Bugis St 99", "Themed", 3, true, facilities2, roomTypeList2);
@@ -524,6 +530,8 @@ namespace SE_Assignment
                                                                                 DateTime newCIDate = DateTime.Now;
                                                                                 DateTime newCODate = DateTime.Now;
 
+
+                                                                                bool editedReservation = false;
                                                                                 while (!((newCIDate.Day - DateTime.Now.Day) >= 2) || !((newCODate.Day - newCIDate.Day) > 0))
                                                                                 {
                                                                                     Console.Write("Enter New Check-In Date: ");
@@ -535,25 +543,26 @@ namespace SE_Assignment
                                                                                     {
                                                                                         if (rtr.Reservation.ReservationId == editID)
                                                                                         {
-                                                                                            bool avail = isRoomAvail(reservationList, rtrList, rtr.RoomType, newCIDate, newCODate);
+                                                                                            bool avail = isRoomAvail(reservationList, rtrList, rtr.RoomType, newCIDate, newCODate, editID);
 
                                                                                             if (avail)
                                                                                             {
-                                                                                                if (!((newCIDate.Day - DateTime.Now.Day) >= 2))
+                                                                                                if (!(((newCIDate - DateTime.Now).Days) >= 2))
                                                                                                 {
                                                                                                     Console.WriteLine("Edit failed! Check in date must be 2 days after today.");
                                                                                                 }
-                                                                                                else if ((newCODate.Day - newCIDate.Day) < 0)
+                                                                                                else if (((newCODate - newCIDate).Days) < 0)
                                                                                                 {
                                                                                                     Console.WriteLine("Check-Out Date cannot be same or earlier than Check-In Date!");
                                                                                                 }
-                                                                                                else if (!((newCODate.Day - newCIDate.Day) > 0))
+                                                                                                else if (!(((newCODate - newCIDate).Days) > 0))
                                                                                                 {
                                                                                                     Console.WriteLine("Days between Check-In Date and Check-Out Date has to be more than 1!");
                                                                                                 }
                                                                                                 else
                                                                                                 {
-                                                                                                    g.editReservation(editID, newCIDate, newCODate, rtr.RoomType.CostPerNight);
+                                                                                                    g.editReservation(editID, newCIDate, newCODate, rtr.RoomType.CostPerNight * ((newCODate - newCIDate).Days));
+                                                                                                    editedReservation = true;
                                                                                                 }
                                                                                             }
                                                                                             else
@@ -562,6 +571,10 @@ namespace SE_Assignment
                                                                                             }
                                                                                         }
                                                                                     }
+                                                                                    if (editedReservation)
+                                                                                    {
+                                                                                        break;
+                                                                                    }                                                                                        
                                                                                 }
                                                                                 continue;
                                                                             case 2:
@@ -885,33 +898,36 @@ namespace SE_Assignment
             return main_choice;
         }
 
-        public static bool isRoomAvail(List<Reservation> rList, List<RoomTypeReservation> rtrList, RoomType rt, DateTime checkIn, DateTime checkOut)
+        public static bool isRoomAvail(List<Reservation> rList, List<RoomTypeReservation> rtrList, RoomType rt, DateTime checkIn, DateTime checkOut, string reservationId)
         {
 
             foreach (Reservation r in rList)
             {
                 foreach (RoomTypeReservation rtr in rtrList)
                 {
-                    if (rtr.RoomType == rt)
+                    if (rtr.Reservation.ReservationId != reservationId) 
                     {
-                        if (checkOut >= rtr.Reservation.CheckInDate && checkOut <= rtr.Reservation.CheckOutDate && (rtr.Reservation.Status == "Submitted" || rtr.Reservation.Status == "Confirmed"))
+                        if (rtr.RoomType == rt)
                         {
-                            return false;
+                            if (checkOut >= rtr.Reservation.CheckInDate && checkOut <= rtr.Reservation.CheckOutDate && (rtr.Reservation.Status == "Submitted" || rtr.Reservation.Status == "Confirmed"))
+                            {
+                                return false;
+                            }
+                            // Check if dates before checkout but after checkin
+                            else if (checkIn > rtr.Reservation.CheckInDate && checkIn < rtr.Reservation.CheckOutDate && (rtr.Reservation.Status == "Submitted" || rtr.Reservation.Status == "Confirmed"))
+                            {
+                                return false;
+                            }
+                            // check if dates inside checkout and checkin
+                            else if (checkIn >= rtr.Reservation.CheckInDate && checkOut <= rtr.Reservation.CheckOutDate && (rtr.Reservation.Status == "Submitted" || rtr.Reservation.Status == "Confirmed"))
+                            {
+                                return false;
+                            }
+                            //else
+                            //{
+                            //    return true;
+                            //}
                         }
-                        // Check if dates before checkout but after checkin
-                        else if (checkIn > rtr.Reservation.CheckInDate && checkIn < rtr.Reservation.CheckOutDate && (rtr.Reservation.Status == "Submitted" || rtr.Reservation.Status == "Confirmed"))
-                        {
-                            return false;
-                        }
-                        // check if dates inside checkout and checkin
-                        else if (checkIn >= rtr.Reservation.CheckInDate && checkOut <= rtr.Reservation.CheckOutDate && (rtr.Reservation.Status == "Submitted" || rtr.Reservation.Status == "Confirmed"))
-                        {
-                            return false;
-                        }
-                        //else
-                        //{
-                        //    return true;
-                        //}
                     }
                 }
             }

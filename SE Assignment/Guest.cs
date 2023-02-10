@@ -127,22 +127,26 @@ namespace SE_Assignment
                 if (rid == re.ReservationId)
                 {   
                     initialCost = re.ReservationCost;
-                    double difference = newCost - initialCost
+                    double difference = newCost - initialCost;
 
                     if (difference > 0) 
                     {
-                        makePayment(re);
+                        re.ReservationCost = newCost;
+                        makePayment(re, initialCost);
+                        Console.WriteLine("Reservation has been successfully editted.\n");
                     }
                     else if (difference < 0) 
                     {
-                        balance += newCost - initialCost;
+                        balance += Math.Abs(difference);
+                        Console.WriteLine("Refunded ${0:#.00}", Math.Abs(difference));
+                        Console.WriteLine("Reservation has been successfully editted.\n");
                     }
-
 
                     re.CheckInDate = ciDate;
                     re.CheckOutDate = coDate;
+                    re.ReservationCost = newCost;
 
-                    Console.WriteLine("Reservation has been successfully editted.");
+                    
                     break;
                 }
                 else
@@ -219,11 +223,10 @@ namespace SE_Assignment
             bool paying = true;
             while (paying)
             {
-                Console.WriteLine("Cost of Reservation is ${0,5:#.00}", newCost);
+                Console.WriteLine("Payable amount is ${0,5:#.00}", newCost);
                 Console.WriteLine();
                 Console.WriteLine("1) Pay by Account Balance");
                 Console.WriteLine("2) Pay by Credit Card");
-                Console.WriteLine("0) Exit");
                 Console.WriteLine();
                 Console.Write("Enter choice: ");
                 int input = Convert.ToInt32(Console.ReadLine());
