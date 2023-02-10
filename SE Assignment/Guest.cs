@@ -202,9 +202,13 @@ namespace SE_Assignment
             }
         }
 
-        public void makePayment(Reservation r)
+        public void makePayment(Reservation r, double vDisc)
         {
             string cardtype, cardno;
+            string? otp;
+            double newCost = r.ReservationCost - vDisc;
+            Console.WriteLine("Cost of Reservation is ${0,5:#.00}", newCost);
+            Console.WriteLine();
             Console.WriteLine("1) Pay by Account Balance");
             Console.WriteLine("2) Pay by Credit Card");
             Console.WriteLine("0) Exit");
@@ -214,14 +218,14 @@ namespace SE_Assignment
             switch (input)
             {
                 case 1:
-                    if (balance >= r.ReservationCost)
+                    if (balance >= newCost)
                     {
-                        balance -= r.ReservationCost;
+                        balance -= newCost;
                         r.Status = "Confirmed";
                         Console.WriteLine("Reservation Paid Successfully!");
-                        Console.WriteLine("${0:#.00} has been deducted from your account balance. Your remaining balance is ${1:#.00}", r.ReservationCost, balance);
+                        Console.WriteLine("${0:#.00} has been deducted from your account balance. Your remaining balance is ${1:#.00}", newCost, balance);
                     }
-                    else if (balance < r.ReservationCost)
+                    else if (balance < newCost)
                     {
                         Console.WriteLine("Insufficient Funds, Would you like to pay the remaining with your credit card?");
                         Console.WriteLine("1) Yes");
@@ -236,6 +240,19 @@ namespace SE_Assignment
                                 cardtype = Console.ReadLine();
                                 Console.Write("Enter Card Number: ");
                                 cardno = Console.ReadLine();
+                                while (true)
+                                {
+                                    Console.Write("Enter OTP sent to your phone number (Not real OTP, Enter 123 to pass, anything else will fail): ");
+                                    otp = Console.ReadLine();
+                                    if (otp == "123")
+                                    {
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("OTP failed, Try again");
+                                    }
+                                }
                                 Console.WriteLine("Reservation Paid Successfully!");
                                 r.Status = "Confirmed";
                                 break;
@@ -249,6 +266,19 @@ namespace SE_Assignment
                     cardtype = Console.ReadLine();
                     Console.Write("Enter Card Number: ");
                     cardno = Console.ReadLine();
+                    while (true)
+                    {
+                        Console.Write("Enter OTP sent to your phone number (Not real OTP, Enter 123 to pass): ");
+                        otp = Console.ReadLine();
+                        if (otp == "123")
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("OTP failed, Try again");
+                        }
+                    }
                     Console.WriteLine("Reservation Paid Successfully!");
                     r.Status = "Confirmed";
                     return;

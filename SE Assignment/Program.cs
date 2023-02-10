@@ -23,11 +23,14 @@ namespace SE_Assignment
             Guest guest7 = new Guest("Lin", "7", "87651234", "lin8765@outlook.com", "S9901234H", 22.20); // 1 old reservation
 
 
-            Vouchers voucher1 = new Vouchers("1", 5, new DateTime(2024, 1, 5));
+            Vouchers voucher1 = new Vouchers("1", 5, new DateTime(2024, 1, 5)); // voucher id is voucher code, eg. enter "1" for voucher code when applying voucher
             Vouchers voucher2 = new Vouchers("2", 5, new DateTime(2025, 2, 1));
             Vouchers voucher3 = new Vouchers("3", 5, new DateTime(2024, 5, 7));
             Vouchers voucher4 = new Vouchers("4", 5, new DateTime(2024, 12, 10));
-            Vouchers voucher5 = new Vouchers("5", 5, new DateTime(2024, 9, 8));
+            Vouchers voucher5 = new Vouchers("5", 5, new DateTime(2021, 9, 8)); // Expired voucher to test
+
+
+            List<Vouchers> vList = new List<Vouchers> { voucher1, voucher2, voucher3, voucher4, voucher5 };
 
             Reservation reservation1 = new Reservation("1", new DateTime(2023, 1, 1), new DateTime(2023, 1, 5), 250, "Fulfilled");
             Reservation reservation2 = new Reservation("2", new DateTime(2023, 12, 12), new DateTime(2023, 12, 17), 500, "Submitted");  //Testable
@@ -95,11 +98,11 @@ namespace SE_Assignment
 
             List<RoomTypeReservation> rtrList = new List<RoomTypeReservation> { rtr1, rtr2, rtr3, rtr4, rtr5 };
 
-            Hotel luxuryHotel = new Hotel("1", "Luxurious Palace", "21 Orchard Rd", "Luxury", 5, true, facilities1, roomTypeList1);
-            Hotel themedHotel = new Hotel("1", "SkyHigh Hotel", "Bugis St 99", "Themed", 3, true, facilities2, roomTypeList2);
-            Hotel cityHotel = new Hotel("1", "Central City Hotel", "184 Newton Rd", "City", 2, true, facilities3, roomTypeList3);
-            Hotel budgetHotel = new Hotel("1", "Budget101", "123 Toa Payoh Rd", "Budget", 4, true, facilities4, roomTypeList4);
-            Hotel ffHotel = new Hotel("1", "FF Hotel", "Changi Rd", "Family-Friendly", 3, true, facilities5, roomTypeList5);
+            Hotel luxuryHotel = new Hotel("1", "Luxurious Palace", "21 Orchard Rd", "Luxury", 5, true, facilities1, roomTypeList1); // change to boolean value to test that voucher prompt not shown
+            Hotel themedHotel = new Hotel("2", "SkyHigh Hotel", "Bugis St 99", "Themed", 3, true, facilities2, roomTypeList2);
+            Hotel cityHotel = new Hotel("3", "Central City Hotel", "184 Newton Rd", "City", 2, true, facilities3, roomTypeList3);
+            Hotel budgetHotel = new Hotel("4", "Budget101", "123 Toa Payoh Rd", "Budget", 4, true, facilities4, roomTypeList4);
+            Hotel ffHotel = new Hotel("5", "FF Hotel", "Changi Rd", "Family-Friendly", 3, true, facilities5, roomTypeList5);
 
             // Add all hotels to hotelcollection
             HotelList hotelList = new HotelList();
@@ -717,11 +720,90 @@ namespace SE_Assignment
                                                             {
                                                                 Console.Write("Enter ID: ");
                                                                 string rsid = Console.ReadLine();
+
+                                                                HotelIterator hiter = new HotelIterator(hotelList);
+                                                                RoomType roomt;
+                                                                bool allowVoucher = false;
+                                                                double vDisc = 0;
+                                                                // Find RoomType for the reservation
+                                                                foreach (RoomTypeReservation rtr in rtrList)
+                                                                {
+                                                                    if (rtr.Reservation.ReservationId == rsid)
+                                                                    {
+                                                                        roomt = rtr.RoomType;
+                                                                        // Iterator to find which Hotel the RoomType belong to
+                                                                        while (hiter.hasNext())
+                                                                        {
+                                                                            Hotel h = (Hotel)hiter.next();
+                                                                            if (h.RoomTypeList.Contains(roomt))
+                                                                            {
+                                                                                allowVoucher = h.VoucherAllow;
+                                                                                break;
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                continue;
+                                                                            }
+
+                                                                        }
+                                                                        break;
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        continue;
+                                                                    }
+                                                                }
+
+                                                                if (allowVoucher)
+                                                                {
+                                                                    bool inputVoucher = true;
+                                                                    while (inputVoucher)
+                                                                    {
+                                                                        bool valid = false;
+                                                                        Console.Write("Enter Voucher Code (Only one can be applied, leave empty if Not Applicable): ");
+                                                                        string? vcode = Console.ReadLine();
+                                                                        if (vcode == "" || vcode is null)
+                                                                        {
+                                                                            inputVoucher = false;
+                                                                            break;
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            foreach (Vouchers v in vList)
+                                                                            {
+                                                                                if (v.VoucherId == vcode)
+                                                                                {
+                                                                                    valid = v.isValid();
+                                                                                    if (valid)
+                                                                                    {
+                                                                                        vDisc = v.DiscountAmt;
+                                                                                        Console.WriteLine("Voucher Applied!");
+                                                                                        inputVoucher = false;
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        Console.WriteLine("Voucher Expired!");
+                                                                                        Console.Write("Would you like to enter another voucher? (Yes/No): ");
+                                                                                        if (Console.ReadLine() == "No")
+                                                                                        {
+                                                                                            inputVoucher = false;
+                                                                                        }
+
+                                                                                    }
+                                                                                    break;
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                        
+                                                                    }
+                                                                    
+                                                                }
+
                                                                 foreach (Reservation r in g.ReservationList)
                                                                 {
                                                                     if (r.ReservationId == rsid)
                                                                     {
-                                                                        g.makePayment(r);
+                                                                        g.makePayment(r, vDisc);
                                                                         break;
                                                                     }
                                                                 }
