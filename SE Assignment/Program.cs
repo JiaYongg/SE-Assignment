@@ -15,7 +15,7 @@ namespace SE_Assignment
             // Initialization of Objects
 
             Guest guest1 = new Guest("Sam", "1", "93836739", "sam56@outlook.com", "S9584736A", 200.50);
-            Guest guest2 = new Guest("Nat", "2", "83759257", "nat24@gmail.com", "S8347483N", 745.20);
+            Guest guest2 = new Guest("Nat", "2", "83759257", "nat24@gmail.com", "S8347483N", 245.20);
             Guest guest3 = new Guest("Kim", "3", "84563445", "kim62@hotmail.com", "S9182745E", 50.60);
             Guest guest4 = new Guest("Lay", "4", "94785965", "lay@connect.np.edu.sg", "T0104957Z", 70.20);
             Guest guest5 = new Guest("Ken", "5", "93857365", "ken51@gmail.com", "S9858373G", 66.50);
@@ -670,7 +670,7 @@ namespace SE_Assignment
                                                 bool inAccBal = true;
                                                 while (inAccBal)
                                                 {
-                                                    Console.WriteLine("You currently have ${0:#.00} in your account balance.", g.Balance);
+                                                    Console.WriteLine("You currently have ${0:#0.00} in your account balance.", g.Balance);
                                                     Console.WriteLine("------------Menu------------");
                                                     Console.WriteLine("1) Top up");
                                                     Console.WriteLine("0) Exit");

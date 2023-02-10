@@ -207,83 +207,92 @@ namespace SE_Assignment
             string cardtype, cardno;
             string? otp;
             double newCost = r.ReservationCost - vDisc;
-            Console.WriteLine("Cost of Reservation is ${0,5:#.00}", newCost);
-            Console.WriteLine();
-            Console.WriteLine("1) Pay by Account Balance");
-            Console.WriteLine("2) Pay by Credit Card");
-            Console.WriteLine("0) Exit");
-            Console.WriteLine();
-            Console.Write("Enter choice: ");
-            int input = Convert.ToInt32(Console.ReadLine());
-            switch (input)
+            bool paying = true;
+            while (paying)
             {
-                case 1:
-                    if (balance >= newCost)
-                    {
-                        balance -= newCost;
-                        r.Status = "Confirmed";
-                        Console.WriteLine("Reservation Paid Successfully!");
-                        Console.WriteLine("${0:#.00} has been deducted from your account balance. Your remaining balance is ${1:#.00}", newCost, balance);
-                    }
-                    else if (balance < newCost)
-                    {
-                        Console.WriteLine("Insufficient Funds, Would you like to pay the remaining with your credit card?");
-                        Console.WriteLine("1) Yes");
-                        Console.WriteLine("2) No");
-                        Console.WriteLine();
-                        Console.Write("Enter choice: ");
-                        input = Convert.ToInt32(Console.ReadLine());
-                        switch (input)
+                Console.WriteLine("Cost of Reservation is ${0,5:#.00}", newCost);
+                Console.WriteLine();
+                Console.WriteLine("1) Pay by Account Balance");
+                Console.WriteLine("2) Pay by Credit Card");
+                Console.WriteLine("0) Exit");
+                Console.WriteLine();
+                Console.Write("Enter choice: ");
+                int input = Convert.ToInt32(Console.ReadLine());
+                switch (input)
+                {
+                    case 1:
+                        if (balance >= newCost)
                         {
-                            case 1:
-                                Console.Write("Enter Type of Card: ");
-                                cardtype = Console.ReadLine();
-                                Console.Write("Enter Card Number: ");
-                                cardno = Console.ReadLine();
-                                while (true)
-                                {
-                                    Console.Write("Enter OTP sent to your phone number (Not real OTP, Enter 123 to pass, anything else will fail): ");
-                                    otp = Console.ReadLine();
-                                    if (otp == "123")
+                            balance -= newCost;
+                            r.Status = "Confirmed";
+                            Console.WriteLine("Reservation Paid Successfully!");
+                            Console.WriteLine("${0:#.00} has been deducted from your account balance. Your remaining balance is ${1:#.00}", newCost, balance);
+                            paying = false;
+                        }
+                        else if (balance < newCost)
+                        {
+                            Console.WriteLine("Insufficient Funds, Would you like to pay the remaining with your credit card?");
+                            Console.WriteLine("1) Yes");
+                            Console.WriteLine("2) No");
+                            Console.WriteLine();
+                            Console.Write("Enter choice: ");
+                            input = Convert.ToInt32(Console.ReadLine());
+                            switch (input)
+                            {
+                                case 1:
+                                    Console.Write("Enter Type of Card: ");
+                                    cardtype = Console.ReadLine();
+                                    Console.Write("Enter Card Number: ");
+                                    cardno = Console.ReadLine();
+                                    while (true)
                                     {
-                                        break;
+                                        Console.Write("Enter OTP sent to your phone number (Not real OTP, Enter 123 to pass, anything else will fail): ");
+                                        otp = Console.ReadLine();
+                                        if (otp == "123")
+                                        {
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("OTP failed, Try again");
+                                        }
                                     }
-                                    else
-                                    {
-                                        Console.WriteLine("OTP failed, Try again");
-                                    }
-                                }
-                                Console.WriteLine("Reservation Paid Successfully!");
-                                r.Status = "Confirmed";
+                                    newCost = balance;
+                                    balance = 0;
+                                    Console.WriteLine("${0:#.00} has been deducted from your account balance. Your remaining balance is ${1:#0.00}", newCost, balance);
+                                    Console.WriteLine("Reservation Paid Successfully!");
+                                    r.Status = "Confirmed";
+                                    paying = false;
+                                    break;
+                                case 2:
+                                    continue;
+                            }
+                        }
+                        return;
+                    case 2:
+                        Console.Write("Enter Type of Card: ");
+                        cardtype = Console.ReadLine();
+                        Console.Write("Enter Card Number: ");
+                        cardno = Console.ReadLine();
+                        while (true)
+                        {
+                            Console.Write("Enter OTP sent to your phone number (Not real OTP, Enter 123 to pass): ");
+                            otp = Console.ReadLine();
+                            if (otp == "123")
+                            {
                                 break;
-                            case 2:
-                                return;
+                            }
+                            else
+                            {
+                                Console.WriteLine("OTP failed, Try again");
+                            }
                         }
-                    }
-                    return;
-                case 2:
-                    Console.Write("Enter Type of Card: ");
-                    cardtype = Console.ReadLine();
-                    Console.Write("Enter Card Number: ");
-                    cardno = Console.ReadLine();
-                    while (true)
-                    {
-                        Console.Write("Enter OTP sent to your phone number (Not real OTP, Enter 123 to pass): ");
-                        otp = Console.ReadLine();
-                        if (otp == "123")
-                        {
-                            break;
-                        }
-                        else
-                        {
-                            Console.WriteLine("OTP failed, Try again");
-                        }
-                    }
-                    Console.WriteLine("Reservation Paid Successfully!");
-                    r.Status = "Confirmed";
-                    return;
+                        Console.WriteLine("Reservation Paid Successfully!");
+                        r.Status = "Confirmed";
+                        paying = false;
+                        return;
+                }
             }
-            
         }
 
         public bool displayAllReservations()
