@@ -7,8 +7,10 @@ using System.Xml.Linq;
 
 namespace SE_Assignment
 {
-    public class Admin //: IObserver
+    public class Admin : IObserver
     {
+        private ISubject hotelRating;
+
         private string adminID;
         private string adminPass;
         public string AdminID
@@ -43,10 +45,9 @@ namespace SE_Assignment
             Console.WriteLine("Guest Successfully Registered");
 
         }
-        //public void Update(int rating)
-        //{
-        //    this.rating = rating;
-        //    Console.WriteLine($"Hotel {name} has been updated with new rating of {rating} stars.");
-        //}
+        public void Update(double rating)
+        {
+            Console.WriteLine($"\nHotel has been updated with new rating of {rating} stars.");
+        }
     }
 }

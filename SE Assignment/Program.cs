@@ -14,6 +14,8 @@ namespace SE_Assignment
         {
             // Initialization of Objects
 
+            Admin admin1 = new Admin("123", "password");
+
             Guest guest1 = new Guest("Sam", "1", "93836739", "sam56@outlook.com", "S9584736A", 200.50);
             Guest guest2 = new Guest("Nat", "2", "83759257", "nat24@gmail.com", "S8347483N", 245.20);
             Guest guest3 = new Guest("Kim", "3", "84563445", "kim62@hotmail.com", "S9182745E", 50.60);
@@ -620,7 +622,7 @@ namespace SE_Assignment
                                                                                     {
                                                                                         if (rt == rtr.RoomType && trackList.Contains(h.HotelID) == false)
                                                                                         {
-                                                                                            Console.WriteLine("{0,-5} {1,-15}   {2,-20}   {3,-25} {4,-30}", h.HotelID, h.Name, rtr.Reservation.CheckInDate, rtr.Reservation.CheckOutDate, rtr.Reservation.ReservationCost);
+                                                                                            Console.WriteLine("{0,-5} {1,-15}   {2,-20}   {3,-25} ${4,-30}", h.HotelID, h.Name, rtr.Reservation.CheckInDate, rtr.Reservation.CheckOutDate, rtr.Reservation.ReservationCost);
                                                                                             checkHotelList.Add(h.HotelID);
                                                                                         }
                                                                                     }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SE_Assignment
 {
-    public class Hotel //: IObserver
+    public class Hotel : IObserver
     {
         private string hotelID;
         private string name;
@@ -89,10 +89,9 @@ namespace SE_Assignment
             }
         }
 
-/*        public void Update(int rating)
+        public void Update(double rating)
         {
-            this.rating = rating;
-            Console.WriteLine($"Hotel {name} has been updated with new rating of {rating} stars.");
-        }*/
+            Console.WriteLine($"\nHotel has been updated with new rating of {rating} stars.");
+        }
     }
 }

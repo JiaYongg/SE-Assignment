@@ -161,6 +161,7 @@ namespace SE_Assignment
             // implementation
             HotelRating hr = new HotelRating(hid, stars, comment);
             hrtList.Add(hr);
+            hr.Notify();
             double totalStars = 0;
             int count = 0;
             foreach (HotelRating hrt in hrtList)
@@ -180,6 +181,7 @@ namespace SE_Assignment
                 if (h.HotelID == hid)
                 {
                     h.calcStars(totalStars, count);
+                    Console.WriteLine("\nNew Hotel Rating Score: {0}", h.NumStars);
                 }
             }
         }

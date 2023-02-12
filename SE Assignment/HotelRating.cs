@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SE_Assignment
 {
-    public class HotelRating
+    public class HotelRating : ISubject
     {
         private string ratingId;
         private double ratingStars;
@@ -22,13 +22,18 @@ namespace SE_Assignment
         public double RatingStars
         {
             get { return ratingStars; }
-            set { ratingStars = value; } //Notify(); 
+            set { ratingStars = value;}  
         }
 
         public string Comments
         {
             get { return comments; }
             set { comments = value; }
+        }
+        public List<IObserver> Observers
+        {
+            get { return observers; }
+            set { observers = value; }
         }
 
         public HotelRating() { }
@@ -38,9 +43,10 @@ namespace SE_Assignment
             RatingId = id;
             RatingStars = stars;
             Comments = comment;
+            observers = new List<IObserver>();
         }
 
-/*        public void Attach(IObserver observer)
+        public void Attach(IObserver observer)
         {
             observers.Add(observer);
         }
@@ -52,11 +58,12 @@ namespace SE_Assignment
 
         public void Notify()
         {
+            Console.WriteLine("\nHotel and Admin have been notified!");
             foreach (var observer in observers)
             {
-                observer.Update(rating);
+                observer.Update(ratingStars);
             }
-        }*/
+        }
 
     }
 }

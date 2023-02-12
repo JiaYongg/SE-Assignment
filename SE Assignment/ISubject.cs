@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace SE_Assignment
 {
-    public interface IObserver
+    public interface ISubject
     {
-        void Update(double rating);
+        void Attach(IObserver o);
+        void Detach(IObserver o);
+        void Notify();
+
     }
 }
