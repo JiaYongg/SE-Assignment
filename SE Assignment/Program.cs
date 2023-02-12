@@ -601,10 +601,13 @@ namespace SE_Assignment
                                                                 continue;
                                                             case 2:
                                                                 bool inRateHotels = true;
+                                                                bool found;
+                                                                List<string> trackList = new List<string>();
+                                                                List<string> checkHotelList = new List<string>();
                                                                 while (inRateHotels)
                                                                 {
                                                                     Console.WriteLine("------------Rate Hotels------------");
-                                                                    Console.WriteLine("{0,-5} {1,-20}", "ID", "Hotel Name");
+                                                                    Console.WriteLine("{0,-5} {1,-15}    {2,-20}   {3,-25} {4,-30}", "ID", "Hotel Name", "Check In Date", "Check Out Date", "Cost");
                                                                     foreach (Hotel h in hotelList.HotelCollection)
                                                                     {
                                                                         foreach (Reservation r in g.ReservationList)
@@ -615,9 +618,10 @@ namespace SE_Assignment
                                                                                 {
                                                                                     foreach (RoomType rt in h.RoomTypeList)
                                                                                     {
-                                                                                        if (rt == rtr.RoomType)
+                                                                                        if (rt == rtr.RoomType && trackList.Contains(h.HotelID) == false)
                                                                                         {
-                                                                                            Console.WriteLine("{0,-5} {1,-20}", h.HotelID, h.Name);
+                                                                                            Console.WriteLine("{0,-5} {1,-15}   {2,-20}   {3,-25} {4,-30}", h.HotelID, h.Name, rtr.Reservation.CheckInDate, rtr.Reservation.CheckOutDate, rtr.Reservation.ReservationCost);
+                                                                                            checkHotelList.Add(h.HotelID);
                                                                                         }
                                                                                     }
                                                                                 }
@@ -634,16 +638,39 @@ namespace SE_Assignment
                                                                     switch (input)
                                                                     {
                                                                         case 0:
-                                                                            inManageReservations = false;
+                                                                            inRateHotels = false;
                                                                             continue;
                                                                         case 1:
                                                                             Console.Write("Enter Hotel ID: ");
                                                                             string hid = Console.ReadLine();
+                                                                            bool check = checkHotelExist(hotelList, hid);
+                                                                            if (check == false)
+                                                                            {
+                                                                                Console.WriteLine("Hotel does not exist!");
+                                                                                continue;
+                                                                            }
+                                                                            if (checkHotelList.Contains(hid) == false)
+                                                                            {
+                                                                                Console.WriteLine("Please enter hotel ID from the list");
+                                                                                continue;
+                                                                            }
                                                                             Console.Write("Enter Number of Stars: ");
-                                                                            double stars = Convert.ToDouble(Console.ReadLine());
+                                                                            string stars = Console.ReadLine();
+                                                                            if (!int.TryParse(stars, out int result))
+                                                                            {
+                                                                                Console.WriteLine("Please enter a number!");
+                                                                                continue;
+                                                                            }
                                                                             Console.Write("Enter Comments: ");
                                                                             string comment = Console.ReadLine();
-                                                                            g.rateHotel(hid, stars, comment, hrtList, hotelList.HotelCollection);
+                                                                            if (string.IsNullOrWhiteSpace(comment))
+                                                                            {
+                                                                                Console.WriteLine("Please leave a comment!");
+                                                                                continue;
+                                                                            }
+                                                                            trackList.Add(hid);
+                                                                            g.rateHotel(hid, Convert.ToDouble(stars), comment, hrtList, hotelList.HotelCollection);
+                                                                            Console.WriteLine("\nHotel Reviewed Successfully!");
                                                                             continue;
                                                                     }
                                                                 }
@@ -958,6 +985,22 @@ namespace SE_Assignment
                     Console.WriteLine("{0,-30} {1,-10} {2,-20} ${3,-10:#.00} {4,-20} {5,-15} {6,-10}", rt.BedType, rt.MaxGuest, rt.BreakfastServed, rt.CostPerNight, hotel.Category, hotel.Location, sb);
                 }
             }
+        }
+        public static bool checkHotelExist(HotelList hotelList, string hid)
+        {
+            bool found = false;
+            HotelIterator hotelIterator = new HotelIterator(hotelList);
+            while (hotelIterator.hasNext())
+            {
+
+                StringBuilder sb = new StringBuilder();
+                Hotel hotel = (Hotel)hotelIterator.next();
+                if (hid == hotel.HotelID)
+                {
+                    found = true;
+                }
+            }
+            return found;
         }
     }
 }

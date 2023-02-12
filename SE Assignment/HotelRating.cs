@@ -11,6 +11,7 @@ namespace SE_Assignment
         private string ratingId;
         private double ratingStars;
         private string comments;
+        private List<IObserver> observers = new List<IObserver>();
 
         public string RatingId
         {
@@ -21,7 +22,7 @@ namespace SE_Assignment
         public double RatingStars
         {
             get { return ratingStars; }
-            set { ratingStars = value; }
+            set { ratingStars = value; } //Notify(); 
         }
 
         public string Comments
@@ -38,6 +39,24 @@ namespace SE_Assignment
             RatingStars = stars;
             Comments = comment;
         }
+
+/*        public void Attach(IObserver observer)
+        {
+            observers.Add(observer);
+        }
+
+        public void Detach(IObserver observer)
+        {
+            observers.Remove(observer);
+        }
+
+        public void Notify()
+        {
+            foreach (var observer in observers)
+            {
+                observer.Update(rating);
+            }
+        }*/
 
     }
 }

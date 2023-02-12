@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace SE_Assignment
 {
-    public class Admin
+    public class Admin //: IObserver
     {
         private string adminID;
         private string adminPass;
@@ -42,5 +43,10 @@ namespace SE_Assignment
             Console.WriteLine("Guest Successfully Registered");
 
         }
+        //public void Update(int rating)
+        //{
+        //    this.rating = rating;
+        //    Console.WriteLine($"Hotel {name} has been updated with new rating of {rating} stars.");
+        //}
     }
 }

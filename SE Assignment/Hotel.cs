@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SE_Assignment
 {
-    public class Hotel
+    public class Hotel //: IObserver
     {
         private string hotelID;
         private string name;
@@ -88,5 +88,11 @@ namespace SE_Assignment
                 Console.WriteLine("This reservation already exists!");
             }
         }
+
+/*        public void Update(int rating)
+        {
+            this.rating = rating;
+            Console.WriteLine($"Hotel {name} has been updated with new rating of {rating} stars.");
+        }*/
     }
 }
