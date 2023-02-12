@@ -110,10 +110,6 @@ namespace SE_Assignment
                         return false;
 
                 }
-                else
-                {
-                    return false;
-                }
             }
             return false;
         }
